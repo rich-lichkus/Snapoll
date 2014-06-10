@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CKArchiverHelper.h"
+#import <Parse/Parse.h>
+#import "CKUser.h"
 
 @interface CKAppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) CKUser *currentUser;
 
 @property (strong, nonatomic) UIWindow *window;
 

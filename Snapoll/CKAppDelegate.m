@@ -7,6 +7,7 @@
 //
 
 #import "CKAppDelegate.h"
+#import "CKGroupVC.h"
 
 @implementation CKAppDelegate
 
@@ -16,10 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    [Parse setApplicationId:@"xtAUG3fDPyrBZEhm8yVwTFV1TapkCaZ2Lc0Bgnnl"
+                  clientKey:@"VPTvs1d2g5E3HO0orwreEZUlw4Q0egTuqpcX9AfA"];
+    
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    self.currentUser = [CKUser sharedCurrentUser];
+    
     return YES;
 }
 

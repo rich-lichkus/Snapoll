@@ -22,6 +22,40 @@
 		0F37B6871905CEC30006444C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F37B66B1905CEC30006444C /* CoreData.framework */; };
 		0F37B68F1905CEC30006444C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F37B68D1905CEC30006444C /* InfoPlist.strings */; };
 		0F37B6911905CEC30006444C /* SnapollTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37B6901905CEC30006444C /* SnapollTests.m */; };
+		0F37B69B1905CEF50006444C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F37B69A1905CEF50006444C /* Storyboard.storyboard */; };
+		0F37B6A21905DB150006444C /* CKGroupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37B6A11905DB150006444C /* CKGroupVC.m */; };
+		0F4417261905F0120090E88C /* CKGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4417251905F0120090E88C /* CKGroup.m */; };
+		0F44172A1905F03D0090E88C /* CKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4417291905F03D0090E88C /* CKUser.m */; };
+		0F44172D1905F0750090E88C /* CKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F44172C1905F0750090E88C /* CKMessage.m */; };
+		0F4417301905F3770090E88C /* CKSimpleText.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F44172F1905F3770090E88C /* CKSimpleText.m */; };
+		0F4417331905F46D0090E88C /* CKPoll.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4417321905F46D0090E88C /* CKPoll.m */; };
+		0F4417361905F4770090E88C /* CKQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4417351905F4770090E88C /* CKQuestion.m */; };
+		0F4417391905F6BB0090E88C /* CKEnumerations.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4417381905F6BB0090E88C /* CKEnumerations.m */; };
+		0F44173F1905F9750090E88C /* CKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F44173E1905F9750090E88C /* CKConstants.m */; };
+		0F4417441905FC6D0090E88C /* CKMultipleChoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4417431905FC6D0090E88C /* CKMultipleChoice.m */; };
+		0F4417471905FC930090E88C /* CKFreeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4417461905FC930090E88C /* CKFreeResponse.m */; };
+		0F4F0E59191D99C7008B4480 /* CKAddContactsTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4F0E58191D99C7008B4480 /* CKAddContactsTVCell.m */; };
+		0F70DA6E19181A8C00DD6996 /* CKNewMemberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F70DA6D19181A8C00DD6996 /* CKNewMemberVC.m */; };
+		0F70DA7219182A1000DD6996 /* CKContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F70DA7119182A1000DD6996 /* CKContactsVC.m */; };
+		0F70DA781918457E00DD6996 /* CKProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F70DA771918457E00DD6996 /* CKProfileVC.m */; };
+		0F8A010519100284000E0028 /* CKGroupMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A010419100284000E0028 /* CKGroupMenuVC.m */; };
+		0F8D924019136BD6002432A6 /* CKSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D923F19136BD6002432A6 /* CKSignUpVC.m */; };
+		0F8FC0E31912C88900D27B80 /* CKNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FC0E21912C88900D27B80 /* CKNetworkHelper.m */; };
+		0F8FC0E61912D15300D27B80 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0E51912D15300D27B80 /* Parse.framework */; };
+		0F8FC0E81912D1F900D27B80 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0E71912D1F900D27B80 /* AudioToolbox.framework */; };
+		0F8FC0EA1912D20600D27B80 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0E91912D20600D27B80 /* CFNetwork.framework */; };
+		0F8FC0EC1912D21200D27B80 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0EB1912D21200D27B80 /* CoreLocation.framework */; };
+		0F8FC0EE1912D21C00D27B80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0ED1912D21C00D27B80 /* libz.dylib */; };
+		0F8FC0F01912D22700D27B80 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0EF1912D22700D27B80 /* MobileCoreServices.framework */; };
+		0F8FC0F21912D22F00D27B80 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F11912D22F00D27B80 /* QuartzCore.framework */; };
+		0F8FC0F41912D23600D27B80 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F31912D23600D27B80 /* Security.framework */; };
+		0F8FC0F61912D23D00D27B80 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F51912D23D00D27B80 /* StoreKit.framework */; };
+		0F8FC0F81912D24600D27B80 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F71912D24600D27B80 /* SystemConfiguration.framework */; };
+		0FE292941907205F00FBFC23 /* CKGroupMemberTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE292931907205F00FBFC23 /* CKGroupMemberTableVC.m */; };
+		0FE292971907251F00FBFC23 /* CKChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE292961907251F00FBFC23 /* CKChatVC.m */; };
+		0FE2929A190727DF00FBFC23 /* CKNewGroupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */; };
+		0FE2929E19076CA100FBFC23 /* CKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE2929D19076CA100FBFC23 /* CKLoginVC.m */; };
+		0FE5281C190EBEDC0011FB9A /* CKArchiverHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5281B190EBEDC0011FB9A /* CKArchiverHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +77,7 @@
 		0F37B66F1905CEC30006444C /* Snapoll-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Snapoll-Info.plist"; sourceTree = "<group>"; };
 		0F37B6711905CEC30006444C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F37B6731905CEC30006444C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0F37B6751905CEC30006444C /* Snapoll-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snapoll-Prefix.pch"; sourceTree = "<group>"; };
+		0F37B6751905CEC30006444C /* Snapoll-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Snapoll-Prefix.pch"; path = "Snapoll/Snapoll-Prefix.pch"; sourceTree = "<group>"; };
 		0F37B6761905CEC30006444C /* CKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKAppDelegate.h; sourceTree = "<group>"; };
 		0F37B6771905CEC30006444C /* CKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CKAppDelegate.m; sourceTree = "<group>"; };
 		0F37B67A1905CEC30006444C /* Snapoll.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Snapoll.xcdatamodel; sourceTree = "<group>"; };
@@ -53,6 +87,63 @@
 		0F37B68C1905CEC30006444C /* SnapollTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SnapollTests-Info.plist"; sourceTree = "<group>"; };
 		0F37B68E1905CEC30006444C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F37B6901905CEC30006444C /* SnapollTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnapollTests.m; sourceTree = "<group>"; };
+		0F37B69A1905CEF50006444C /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		0F37B6A01905DB150006444C /* CKGroupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupVC.h; sourceTree = "<group>"; };
+		0F37B6A11905DB150006444C /* CKGroupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupVC.m; sourceTree = "<group>"; };
+		0F4417241905F0120090E88C /* CKGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroup.h; sourceTree = "<group>"; };
+		0F4417251905F0120090E88C /* CKGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroup.m; sourceTree = "<group>"; };
+		0F4417281905F03D0090E88C /* CKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKUser.h; sourceTree = "<group>"; };
+		0F4417291905F03D0090E88C /* CKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKUser.m; sourceTree = "<group>"; };
+		0F44172B1905F0750090E88C /* CKMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKMessage.h; sourceTree = "<group>"; };
+		0F44172C1905F0750090E88C /* CKMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKMessage.m; sourceTree = "<group>"; };
+		0F44172E1905F3770090E88C /* CKSimpleText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKSimpleText.h; sourceTree = "<group>"; };
+		0F44172F1905F3770090E88C /* CKSimpleText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKSimpleText.m; sourceTree = "<group>"; };
+		0F4417311905F46D0090E88C /* CKPoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKPoll.h; sourceTree = "<group>"; };
+		0F4417321905F46D0090E88C /* CKPoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKPoll.m; sourceTree = "<group>"; };
+		0F4417341905F4770090E88C /* CKQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKQuestion.h; sourceTree = "<group>"; };
+		0F4417351905F4770090E88C /* CKQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKQuestion.m; sourceTree = "<group>"; };
+		0F4417371905F6BB0090E88C /* CKEnumerations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKEnumerations.h; path = Snapoll/CKEnumerations.h; sourceTree = "<group>"; };
+		0F4417381905F6BB0090E88C /* CKEnumerations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKEnumerations.m; path = Snapoll/CKEnumerations.m; sourceTree = "<group>"; };
+		0F44173D1905F9750090E88C /* CKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKConstants.h; path = Snapoll/CKConstants.h; sourceTree = "<group>"; };
+		0F44173E1905F9750090E88C /* CKConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKConstants.m; path = Snapoll/CKConstants.m; sourceTree = "<group>"; };
+		0F4417421905FC6D0090E88C /* CKMultipleChoice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKMultipleChoice.h; sourceTree = "<group>"; };
+		0F4417431905FC6D0090E88C /* CKMultipleChoice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKMultipleChoice.m; sourceTree = "<group>"; };
+		0F4417451905FC930090E88C /* CKFreeResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKFreeResponse.h; sourceTree = "<group>"; };
+		0F4417461905FC930090E88C /* CKFreeResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKFreeResponse.m; sourceTree = "<group>"; };
+		0F4F0E57191D99C7008B4480 /* CKAddContactsTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKAddContactsTVCell.h; sourceTree = "<group>"; };
+		0F4F0E58191D99C7008B4480 /* CKAddContactsTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKAddContactsTVCell.m; sourceTree = "<group>"; };
+		0F70DA6C19181A8C00DD6996 /* CKNewMemberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKNewMemberVC.h; sourceTree = "<group>"; };
+		0F70DA6D19181A8C00DD6996 /* CKNewMemberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKNewMemberVC.m; sourceTree = "<group>"; };
+		0F70DA7019182A1000DD6996 /* CKContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKContactsVC.h; path = ../CKContactsVC.h; sourceTree = "<group>"; };
+		0F70DA7119182A1000DD6996 /* CKContactsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKContactsVC.m; path = ../CKContactsVC.m; sourceTree = "<group>"; };
+		0F70DA761918457E00DD6996 /* CKProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKProfileVC.h; sourceTree = "<group>"; };
+		0F70DA771918457E00DD6996 /* CKProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKProfileVC.m; sourceTree = "<group>"; };
+		0F8A010319100284000E0028 /* CKGroupMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupMenuVC.h; sourceTree = "<group>"; };
+		0F8A010419100284000E0028 /* CKGroupMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupMenuVC.m; sourceTree = "<group>"; };
+		0F8D923E19136BD6002432A6 /* CKSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKSignUpVC.h; sourceTree = "<group>"; };
+		0F8D923F19136BD6002432A6 /* CKSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKSignUpVC.m; sourceTree = "<group>"; };
+		0F8FC0E11912C88900D27B80 /* CKNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKNetworkHelper.h; sourceTree = "<group>"; };
+		0F8FC0E21912C88900D27B80 /* CKNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKNetworkHelper.m; sourceTree = "<group>"; };
+		0F8FC0E51912D15300D27B80 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		0F8FC0E71912D1F900D27B80 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		0F8FC0E91912D20600D27B80 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		0F8FC0EB1912D21200D27B80 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0F8FC0ED1912D21C00D27B80 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		0F8FC0EF1912D22700D27B80 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		0F8FC0F11912D22F00D27B80 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0F8FC0F31912D23600D27B80 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0F8FC0F51912D23D00D27B80 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0F8FC0F71912D24600D27B80 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0FE292921907205F00FBFC23 /* CKGroupMemberTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupMemberTableVC.h; sourceTree = "<group>"; };
+		0FE292931907205F00FBFC23 /* CKGroupMemberTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupMemberTableVC.m; sourceTree = "<group>"; };
+		0FE292951907251F00FBFC23 /* CKChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKChatVC.h; path = ../CKChatVC.h; sourceTree = "<group>"; };
+		0FE292961907251F00FBFC23 /* CKChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKChatVC.m; path = ../CKChatVC.m; sourceTree = "<group>"; };
+		0FE29298190727DF00FBFC23 /* CKNewGroupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKNewGroupVC.h; sourceTree = "<group>"; };
+		0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKNewGroupVC.m; sourceTree = "<group>"; };
+		0FE2929C19076CA100FBFC23 /* CKLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKLoginVC.h; sourceTree = "<group>"; };
+		0FE2929D19076CA100FBFC23 /* CKLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKLoginVC.m; sourceTree = "<group>"; };
+		0FE5281A190EBEDC0011FB9A /* CKArchiverHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKArchiverHelper.h; path = Snapoll/CKArchiverHelper.h; sourceTree = "<group>"; };
+		0FE5281B190EBEDC0011FB9A /* CKArchiverHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKArchiverHelper.m; path = Snapoll/CKArchiverHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +151,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F8FC0F81912D24600D27B80 /* SystemConfiguration.framework in Frameworks */,
+				0F8FC0F61912D23D00D27B80 /* StoreKit.framework in Frameworks */,
+				0F8FC0F41912D23600D27B80 /* Security.framework in Frameworks */,
+				0F8FC0F21912D22F00D27B80 /* QuartzCore.framework in Frameworks */,
+				0F8FC0F01912D22700D27B80 /* MobileCoreServices.framework in Frameworks */,
+				0F8FC0EE1912D21C00D27B80 /* libz.dylib in Frameworks */,
+				0F8FC0EC1912D21200D27B80 /* CoreLocation.framework in Frameworks */,
+				0F8FC0EA1912D20600D27B80 /* CFNetwork.framework in Frameworks */,
+				0F8FC0E81912D1F900D27B80 /* AudioToolbox.framework in Frameworks */,
 				0F37B6681905CEC30006444C /* CoreGraphics.framework in Frameworks */,
 				0F37B66C1905CEC30006444C /* CoreData.framework in Frameworks */,
 				0F37B66A1905CEC30006444C /* UIKit.framework in Frameworks */,
 				0F37B6661905CEC30006444C /* Foundation.framework in Frameworks */,
+				0F8FC0E61912D15300D27B80 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +204,16 @@
 		0F37B6641905CEC30006444C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F8FC0F71912D24600D27B80 /* SystemConfiguration.framework */,
+				0F8FC0F51912D23D00D27B80 /* StoreKit.framework */,
+				0F8FC0F31912D23600D27B80 /* Security.framework */,
+				0F8FC0F11912D22F00D27B80 /* QuartzCore.framework */,
+				0F8FC0EF1912D22700D27B80 /* MobileCoreServices.framework */,
+				0F8FC0ED1912D21C00D27B80 /* libz.dylib */,
+				0F8FC0EB1912D21200D27B80 /* CoreLocation.framework */,
+				0F8FC0E91912D20600D27B80 /* CFNetwork.framework */,
+				0F8FC0E71912D1F900D27B80 /* AudioToolbox.framework */,
+				0F8FC0E51912D15300D27B80 /* Parse.framework */,
 				0F37B6651905CEC30006444C /* Foundation.framework */,
 				0F37B6671905CEC30006444C /* CoreGraphics.framework */,
 				0F37B6691905CEC30006444C /* UIKit.framework */,
@@ -115,10 +226,15 @@
 		0F37B66D1905CEC30006444C /* Snapoll */ = {
 			isa = PBXGroup;
 			children = (
+				0F37B69A1905CEF50006444C /* Storyboard.storyboard */,
 				0F37B6761905CEC30006444C /* CKAppDelegate.h */,
 				0F37B6771905CEC30006444C /* CKAppDelegate.m */,
-				0F37B67C1905CEC30006444C /* Images.xcassets */,
-				0F37B6791905CEC30006444C /* Snapoll.xcdatamodeld */,
+				0F4417271905F02A0090E88C /* Model */,
+				0F37B69F1905D1F60006444C /* View Controllers */,
+				0F44173C1905F7490090E88C /* Data Persistance */,
+				0F8FC0E41912C89600D27B80 /* Networking */,
+				0F44173B1905F7320090E88C /* Media */,
+				0F44173A1905F6C60090E88C /* Organizational */,
 				0F37B66E1905CEC30006444C /* Supporting Files */,
 			);
 			path = Snapoll;
@@ -130,7 +246,6 @@
 				0F37B66F1905CEC30006444C /* Snapoll-Info.plist */,
 				0F37B6701905CEC30006444C /* InfoPlist.strings */,
 				0F37B6731905CEC30006444C /* main.m */,
-				0F37B6751905CEC30006444C /* Snapoll-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -151,6 +266,187 @@
 				0F37B68D1905CEC30006444C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0F37B69F1905D1F60006444C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0F8D923E19136BD6002432A6 /* CKSignUpVC.h */,
+				0F8D923F19136BD6002432A6 /* CKSignUpVC.m */,
+				0FE2929C19076CA100FBFC23 /* CKLoginVC.h */,
+				0FE2929D19076CA100FBFC23 /* CKLoginVC.m */,
+				0F70DA7319182A1B00DD6996 /* Menu */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		0F4417271905F02A0090E88C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F4417281905F03D0090E88C /* CKUser.h */,
+				0F4417291905F03D0090E88C /* CKUser.m */,
+				0F4417241905F0120090E88C /* CKGroup.h */,
+				0F4417251905F0120090E88C /* CKGroup.m */,
+				0F4417401905FC090090E88C /* Messages */,
+				0F4417411905FC330090E88C /* Questions */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0F44173A1905F6C60090E88C /* Organizational */ = {
+			isa = PBXGroup;
+			children = (
+				0F37B6751905CEC30006444C /* Snapoll-Prefix.pch */,
+				0F4417371905F6BB0090E88C /* CKEnumerations.h */,
+				0F4417381905F6BB0090E88C /* CKEnumerations.m */,
+				0F44173D1905F9750090E88C /* CKConstants.h */,
+				0F44173E1905F9750090E88C /* CKConstants.m */,
+			);
+			name = Organizational;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		0F44173B1905F7320090E88C /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				0F37B67C1905CEC30006444C /* Images.xcassets */,
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
+		0F44173C1905F7490090E88C /* Data Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				0FE5281A190EBEDC0011FB9A /* CKArchiverHelper.h */,
+				0FE5281B190EBEDC0011FB9A /* CKArchiverHelper.m */,
+				0F37B6791905CEC30006444C /* Snapoll.xcdatamodeld */,
+			);
+			name = "Data Persistance";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		0F4417401905FC090090E88C /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				0F44172B1905F0750090E88C /* CKMessage.h */,
+				0F44172C1905F0750090E88C /* CKMessage.m */,
+				0F4417481905FC9F0090E88C /* Types */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
+		0F4417411905FC330090E88C /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				0F4417341905F4770090E88C /* CKQuestion.h */,
+				0F4417351905F4770090E88C /* CKQuestion.m */,
+				0F4417491905FD380090E88C /* Types */,
+			);
+			name = Questions;
+			sourceTree = "<group>";
+		};
+		0F4417481905FC9F0090E88C /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				0F44172E1905F3770090E88C /* CKSimpleText.h */,
+				0F44172F1905F3770090E88C /* CKSimpleText.m */,
+				0F4417311905F46D0090E88C /* CKPoll.h */,
+				0F4417321905F46D0090E88C /* CKPoll.m */,
+			);
+			name = Types;
+			sourceTree = "<group>";
+		};
+		0F4417491905FD380090E88C /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				0F4417421905FC6D0090E88C /* CKMultipleChoice.h */,
+				0F4417431905FC6D0090E88C /* CKMultipleChoice.m */,
+				0F4417451905FC930090E88C /* CKFreeResponse.h */,
+				0F4417461905FC930090E88C /* CKFreeResponse.m */,
+			);
+			name = Types;
+			sourceTree = "<group>";
+		};
+		0F4F0E5A191D99DA008B4480 /* Add Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				0F4F0E57191D99C7008B4480 /* CKAddContactsTVCell.h */,
+				0F4F0E58191D99C7008B4480 /* CKAddContactsTVCell.m */,
+			);
+			name = "Add Contacts";
+			sourceTree = "<group>";
+		};
+		0F70DA6F19181AA100DD6996 /* Members */ = {
+			isa = PBXGroup;
+			children = (
+				0FE292921907205F00FBFC23 /* CKGroupMemberTableVC.h */,
+				0FE292931907205F00FBFC23 /* CKGroupMemberTableVC.m */,
+				0F70DA6C19181A8C00DD6996 /* CKNewMemberVC.h */,
+				0F70DA6D19181A8C00DD6996 /* CKNewMemberVC.m */,
+				0F4F0E5A191D99DA008B4480 /* Add Contacts */,
+			);
+			name = Members;
+			sourceTree = "<group>";
+		};
+		0F70DA7319182A1B00DD6996 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				0F8A010319100284000E0028 /* CKGroupMenuVC.h */,
+				0F8A010419100284000E0028 /* CKGroupMenuVC.m */,
+				0F70DA791918458F00DD6996 /* Profile */,
+				0FE2929B190727EA00FBFC23 /* Group */,
+				0F70DA7419182A5700DD6996 /* Contacts */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		0F70DA7419182A5700DD6996 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				0F70DA7019182A1000DD6996 /* CKContactsVC.h */,
+				0F70DA7119182A1000DD6996 /* CKContactsVC.m */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		0F70DA7519182A7D00DD6996 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				0FE292951907251F00FBFC23 /* CKChatVC.h */,
+				0FE292961907251F00FBFC23 /* CKChatVC.m */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
+		0F70DA791918458F00DD6996 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0F70DA761918457E00DD6996 /* CKProfileVC.h */,
+				0F70DA771918457E00DD6996 /* CKProfileVC.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		0F8FC0E41912C89600D27B80 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0F8FC0E11912C88900D27B80 /* CKNetworkHelper.h */,
+				0F8FC0E21912C88900D27B80 /* CKNetworkHelper.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		0FE2929B190727EA00FBFC23 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				0F37B6A01905DB150006444C /* CKGroupVC.h */,
+				0F37B6A11905DB150006444C /* CKGroupVC.m */,
+				0FE29298190727DF00FBFC23 /* CKNewGroupVC.h */,
+				0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */,
+				0F70DA7519182A7D00DD6996 /* Chat */,
+				0F70DA6F19181AA100DD6996 /* Members */,
+			);
+			name = Group;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +527,7 @@
 			files = (
 				0F37B6721905CEC30006444C /* InfoPlist.strings in Resources */,
 				0F37B67D1905CEC30006444C /* Images.xcassets in Resources */,
+				0F37B69B1905CEF50006444C /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,9 +546,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FE2929E19076CA100FBFC23 /* CKLoginVC.m in Sources */,
+				0F70DA781918457E00DD6996 /* CKProfileVC.m in Sources */,
+				0F44172D1905F0750090E88C /* CKMessage.m in Sources */,
 				0F37B6781905CEC30006444C /* CKAppDelegate.m in Sources */,
 				0F37B6741905CEC30006444C /* main.m in Sources */,
 				0F37B67B1905CEC30006444C /* Snapoll.xcdatamodeld in Sources */,
+				0F37B6A21905DB150006444C /* CKGroupVC.m in Sources */,
+				0FE292941907205F00FBFC23 /* CKGroupMemberTableVC.m in Sources */,
+				0F8FC0E31912C88900D27B80 /* CKNetworkHelper.m in Sources */,
+				0F4417361905F4770090E88C /* CKQuestion.m in Sources */,
+				0F4417441905FC6D0090E88C /* CKMultipleChoice.m in Sources */,
+				0F70DA6E19181A8C00DD6996 /* CKNewMemberVC.m in Sources */,
+				0FE5281C190EBEDC0011FB9A /* CKArchiverHelper.m in Sources */,
+				0F4417391905F6BB0090E88C /* CKEnumerations.m in Sources */,
+				0F44173F1905F9750090E88C /* CKConstants.m in Sources */,
+				0F4417331905F46D0090E88C /* CKPoll.m in Sources */,
+				0F70DA7219182A1000DD6996 /* CKContactsVC.m in Sources */,
+				0F44172A1905F03D0090E88C /* CKUser.m in Sources */,
+				0F4417301905F3770090E88C /* CKSimpleText.m in Sources */,
+				0F8A010519100284000E0028 /* CKGroupMenuVC.m in Sources */,
+				0F4F0E59191D99C7008B4480 /* CKAddContactsTVCell.m in Sources */,
+				0FE2929A190727DF00FBFC23 /* CKNewGroupVC.m in Sources */,
+				0F8D924019136BD6002432A6 /* CKSignUpVC.m in Sources */,
+				0F4417471905FC930090E88C /* CKFreeResponse.m in Sources */,
+				0FE292971907251F00FBFC23 /* CKChatVC.m in Sources */,
+				0F4417261905F0120090E88C /* CKGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +688,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Snapoll/Snapoll-Prefix.pch";
 				INFOPLIST_FILE = "Snapoll/Snapoll-Info.plist";
@@ -381,6 +705,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Snapoll/Snapoll-Prefix.pch";
 				INFOPLIST_FILE = "Snapoll/Snapoll-Info.plist";
@@ -448,6 +776,7 @@
 				0F37B6961905CEC30006444C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F37B6971905CEC30006444C /* Build configuration list for PBXNativeTarget "SnapollTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +785,7 @@
 				0F37B6991905CEC30006444C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -466,7 +796,8 @@
 				0F37B67A1905CEC30006444C /* Snapoll.xcdatamodel */,
 			);
 			currentVersion = 0F37B67A1905CEC30006444C /* Snapoll.xcdatamodel */;
-			path = Snapoll.xcdatamodeld;
+			name = Snapoll.xcdatamodeld;
+			path = Snapoll/Snapoll.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
