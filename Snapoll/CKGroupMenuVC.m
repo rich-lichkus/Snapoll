@@ -118,7 +118,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"contactCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sddell" forIndexPath:indexPath];
     
     CKUser *currentContact = self.currentUser.contacts[indexPath.row];
     cell.imageView.layer.shouldRasterize = YES;

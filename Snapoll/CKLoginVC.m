@@ -78,7 +78,7 @@
                 [CKArchiverHelper saveUserDataToArchive];
                
                 // Segue to app menu, which loads groups vc by default
-                [self performSegueWithIdentifier:@"toGroupMenu" sender:nil];
+                [self performSegueWithIdentifier:@"toHotBoxRootVC" sender:nil];
 
             } else {
                 // Error label displayed if sign is not authenticated

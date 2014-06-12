@@ -1,48 +1,37 @@
 //
-//  CKGroupMemberTableVC.m
+//  CKGroupMemberVC.m
 //  Snapoll
 //
-//  Created by Richard Lichkus on 4/22/14.
+//  Created by Richard Lichkus on 6/11/14.
 //  Copyright (c) 2014 Richard Lichkus. All rights reserved.
 //
 
-#import "CKGroupMemberTableVC.h"
+#import "CKGroupMemberVC.h"
 
-@interface CKGroupMemberTableVC ()
+@interface CKGroupMemberVC() <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) CKUser *currentUser;
+@property (weak, nonatomic) IBOutlet UITableView *tblGroupMember;
 
 @end
 
-@implementation CKGroupMemberTableVC
+@implementation CKGroupMemberVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+#pragma mark - View
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-   // [self parseUpdateGroupMembers];
+    // [self parseUpdateGroupMembers];
     
     //[self.tableView reloadData];
 }
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    
-    UIBarButtonItem *btnAddNewMembers = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewMember:)];
-    
-    [self.tabBarController.navigationItem setRightBarButtonItems:@[btnAddNewMembers] animated:NO];
+    [self configureTables];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -51,9 +40,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
+
+#pragma mark - Configure and setup functions
+
+-(void)configureTables{
+    self.tblGroupMember.delegate = self;
+    self.tblGroupMember.dataSource = self;
 }
 
 #pragma mark - Table view data source
@@ -132,42 +124,42 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 #pragma mark - Navigation
 
@@ -192,7 +184,7 @@
         self.currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
         [CKArchiverHelper saveUserDataToArchive];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self.tableView reloadData];
+            [self.tblGroupMember reloadData];
         }];
     }];
     
@@ -213,10 +205,18 @@
             }];
         }
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self.tableView reloadData];
+            [self.tblGroupMember reloadData];
         }];
     }];
 }
+
+#pragma mark - Memory
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
 
 
 @end

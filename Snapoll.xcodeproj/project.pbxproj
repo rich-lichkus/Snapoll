@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F17EA091947AB2F00EBE443 /* CKGroupRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F17EA081947AB2F00EBE443 /* CKGroupRootVC.m */; };
+		0F17EA0C1947AEE000EBE443 /* CKHotBoxRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F17EA0B1947AEE000EBE443 /* CKHotBoxRootVC.m */; };
+		0F17EA101947B95C00EBE443 /* CKAllEventsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F17EA0F1947B95C00EBE443 /* CKAllEventsVC.m */; };
+		0F2212CF1948F30900A1374D /* CKGroupMemberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2212CE1948F30900A1374D /* CKGroupMemberVC.m */; };
+		0F2212D31949085F00A1374D /* CKContactsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2212D21949085F00A1374D /* CKContactsCell.m */; };
 		0F37B6661905CEC30006444C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F37B6651905CEC30006444C /* Foundation.framework */; };
 		0F37B6681905CEC30006444C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F37B6671905CEC30006444C /* CoreGraphics.framework */; };
 		0F37B66A1905CEC30006444C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F37B6691905CEC30006444C /* UIKit.framework */; };
@@ -36,9 +41,7 @@
 		0F4417471905FC930090E88C /* CKFreeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4417461905FC930090E88C /* CKFreeResponse.m */; };
 		0F4F0E59191D99C7008B4480 /* CKAddContactsTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4F0E58191D99C7008B4480 /* CKAddContactsTVCell.m */; };
 		0F70DA6E19181A8C00DD6996 /* CKNewMemberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F70DA6D19181A8C00DD6996 /* CKNewMemberVC.m */; };
-		0F70DA7219182A1000DD6996 /* CKContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F70DA7119182A1000DD6996 /* CKContactsVC.m */; };
 		0F70DA781918457E00DD6996 /* CKProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F70DA771918457E00DD6996 /* CKProfileVC.m */; };
-		0F8A010519100284000E0028 /* CKGroupMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A010419100284000E0028 /* CKGroupMenuVC.m */; };
 		0F8D924019136BD6002432A6 /* CKSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D923F19136BD6002432A6 /* CKSignUpVC.m */; };
 		0F8FC0E31912C88900D27B80 /* CKNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8FC0E21912C88900D27B80 /* CKNetworkHelper.m */; };
 		0F8FC0E61912D15300D27B80 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0E51912D15300D27B80 /* Parse.framework */; };
@@ -51,8 +54,10 @@
 		0F8FC0F41912D23600D27B80 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F31912D23600D27B80 /* Security.framework */; };
 		0F8FC0F61912D23D00D27B80 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F51912D23D00D27B80 /* StoreKit.framework */; };
 		0F8FC0F81912D24600D27B80 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F71912D24600D27B80 /* SystemConfiguration.framework */; };
+		0FD01F1F194812A900ED20B3 /* CKGroupEventsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD01F1E194812A900ED20B3 /* CKGroupEventsVC.m */; };
+		0FD01F231948DE2300ED20B3 /* CKContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD01F221948DE2300ED20B3 /* CKContactsVC.m */; };
+		0FD01F261948ECD300ED20B3 /* CKChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD01F251948ECD300ED20B3 /* CKChatVC.m */; };
 		0FE292941907205F00FBFC23 /* CKGroupMemberTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE292931907205F00FBFC23 /* CKGroupMemberTableVC.m */; };
-		0FE292971907251F00FBFC23 /* CKChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE292961907251F00FBFC23 /* CKChatVC.m */; };
 		0FE2929A190727DF00FBFC23 /* CKNewGroupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */; };
 		0FE2929E19076CA100FBFC23 /* CKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE2929D19076CA100FBFC23 /* CKLoginVC.m */; };
 		0FE5281C190EBEDC0011FB9A /* CKArchiverHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5281B190EBEDC0011FB9A /* CKArchiverHelper.m */; };
@@ -69,6 +74,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F17EA071947AB2E00EBE443 /* CKGroupRootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupRootVC.h; sourceTree = "<group>"; };
+		0F17EA081947AB2F00EBE443 /* CKGroupRootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupRootVC.m; sourceTree = "<group>"; };
+		0F17EA0A1947AEE000EBE443 /* CKHotBoxRootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKHotBoxRootVC.h; sourceTree = "<group>"; };
+		0F17EA0B1947AEE000EBE443 /* CKHotBoxRootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKHotBoxRootVC.m; sourceTree = "<group>"; };
+		0F17EA0E1947B95C00EBE443 /* CKAllEventsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKAllEventsVC.h; sourceTree = "<group>"; };
+		0F17EA0F1947B95C00EBE443 /* CKAllEventsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKAllEventsVC.m; sourceTree = "<group>"; };
+		0F2212CD1948F30900A1374D /* CKGroupMemberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupMemberVC.h; sourceTree = "<group>"; };
+		0F2212CE1948F30900A1374D /* CKGroupMemberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupMemberVC.m; sourceTree = "<group>"; };
+		0F2212D11949085F00A1374D /* CKContactsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKContactsCell.h; sourceTree = "<group>"; };
+		0F2212D21949085F00A1374D /* CKContactsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKContactsCell.m; sourceTree = "<group>"; };
 		0F37B6621905CEC30006444C /* Snapoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F37B6651905CEC30006444C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F37B6671905CEC30006444C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -114,12 +129,8 @@
 		0F4F0E58191D99C7008B4480 /* CKAddContactsTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKAddContactsTVCell.m; sourceTree = "<group>"; };
 		0F70DA6C19181A8C00DD6996 /* CKNewMemberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKNewMemberVC.h; sourceTree = "<group>"; };
 		0F70DA6D19181A8C00DD6996 /* CKNewMemberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKNewMemberVC.m; sourceTree = "<group>"; };
-		0F70DA7019182A1000DD6996 /* CKContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKContactsVC.h; path = ../CKContactsVC.h; sourceTree = "<group>"; };
-		0F70DA7119182A1000DD6996 /* CKContactsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKContactsVC.m; path = ../CKContactsVC.m; sourceTree = "<group>"; };
 		0F70DA761918457E00DD6996 /* CKProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKProfileVC.h; sourceTree = "<group>"; };
 		0F70DA771918457E00DD6996 /* CKProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKProfileVC.m; sourceTree = "<group>"; };
-		0F8A010319100284000E0028 /* CKGroupMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupMenuVC.h; sourceTree = "<group>"; };
-		0F8A010419100284000E0028 /* CKGroupMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupMenuVC.m; sourceTree = "<group>"; };
 		0F8D923E19136BD6002432A6 /* CKSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKSignUpVC.h; sourceTree = "<group>"; };
 		0F8D923F19136BD6002432A6 /* CKSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKSignUpVC.m; sourceTree = "<group>"; };
 		0F8FC0E11912C88900D27B80 /* CKNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKNetworkHelper.h; sourceTree = "<group>"; };
@@ -134,10 +145,14 @@
 		0F8FC0F31912D23600D27B80 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0F8FC0F51912D23D00D27B80 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0F8FC0F71912D24600D27B80 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0FD01F1D194812A800ED20B3 /* CKGroupEventsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupEventsVC.h; sourceTree = "<group>"; };
+		0FD01F1E194812A900ED20B3 /* CKGroupEventsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupEventsVC.m; sourceTree = "<group>"; };
+		0FD01F211948DE2300ED20B3 /* CKContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKContactsVC.h; sourceTree = "<group>"; };
+		0FD01F221948DE2300ED20B3 /* CKContactsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKContactsVC.m; sourceTree = "<group>"; };
+		0FD01F241948ECBF00ED20B3 /* CKChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKChatVC.h; sourceTree = "<group>"; };
+		0FD01F251948ECD300ED20B3 /* CKChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKChatVC.m; sourceTree = "<group>"; };
 		0FE292921907205F00FBFC23 /* CKGroupMemberTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupMemberTableVC.h; sourceTree = "<group>"; };
 		0FE292931907205F00FBFC23 /* CKGroupMemberTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupMemberTableVC.m; sourceTree = "<group>"; };
-		0FE292951907251F00FBFC23 /* CKChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKChatVC.h; path = ../CKChatVC.h; sourceTree = "<group>"; };
-		0FE292961907251F00FBFC23 /* CKChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKChatVC.m; path = ../CKChatVC.m; sourceTree = "<group>"; };
 		0FE29298190727DF00FBFC23 /* CKNewGroupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKNewGroupVC.h; sourceTree = "<group>"; };
 		0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKNewGroupVC.m; sourceTree = "<group>"; };
 		0FE2929C19076CA100FBFC23 /* CKLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKLoginVC.h; sourceTree = "<group>"; };
@@ -182,6 +197,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F17EA0D1947B86500EBE443 /* Group Root */ = {
+			isa = PBXGroup;
+			children = (
+				0F17EA071947AB2E00EBE443 /* CKGroupRootVC.h */,
+				0F17EA081947AB2F00EBE443 /* CKGroupRootVC.m */,
+				0F70DA6F19181AA100DD6996 /* Members */,
+				0FD01F20194812E700ED20B3 /* Events */,
+				0F70DA7519182A7D00DD6996 /* Chat */,
+			);
+			name = "Group Root";
+			sourceTree = "<group>";
+		};
+		0F17EA111947B99400EBE443 /* CKAllEvents */ = {
+			isa = PBXGroup;
+			children = (
+				0F17EA0E1947B95C00EBE443 /* CKAllEventsVC.h */,
+				0F17EA0F1947B95C00EBE443 /* CKAllEventsVC.m */,
+			);
+			name = CKAllEvents;
+			sourceTree = "<group>";
+		};
+		0F17EA121947B9B600EBE443 /* Obsolete */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Obsolete;
+			sourceTree = "<group>";
+		};
+		0F2212D01949083C00A1374D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F2212D11949085F00A1374D /* CKContactsCell.h */,
+				0F2212D21949085F00A1374D /* CKContactsCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		0F37B6591905CEC20006444C = {
 			isa = PBXGroup;
 			children = (
@@ -275,7 +327,10 @@
 				0F8D923F19136BD6002432A6 /* CKSignUpVC.m */,
 				0FE2929C19076CA100FBFC23 /* CKLoginVC.h */,
 				0FE2929D19076CA100FBFC23 /* CKLoginVC.m */,
-				0F70DA7319182A1B00DD6996 /* Menu */,
+				0F70DA7319182A1B00DD6996 /* Hot Box Root */,
+				0F17EA0D1947B86500EBE443 /* Group Root */,
+				0F17EA121947B9B600EBE443 /* Obsolete */,
+				0F70DA791918458F00DD6996 /* Profile */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -379,6 +434,8 @@
 		0F70DA6F19181AA100DD6996 /* Members */ = {
 			isa = PBXGroup;
 			children = (
+				0F2212CD1948F30900A1374D /* CKGroupMemberVC.h */,
+				0F2212CE1948F30900A1374D /* CKGroupMemberVC.m */,
 				0FE292921907205F00FBFC23 /* CKGroupMemberTableVC.h */,
 				0FE292931907205F00FBFC23 /* CKGroupMemberTableVC.m */,
 				0F70DA6C19181A8C00DD6996 /* CKNewMemberVC.h */,
@@ -388,23 +445,24 @@
 			name = Members;
 			sourceTree = "<group>";
 		};
-		0F70DA7319182A1B00DD6996 /* Menu */ = {
+		0F70DA7319182A1B00DD6996 /* Hot Box Root */ = {
 			isa = PBXGroup;
 			children = (
-				0F8A010319100284000E0028 /* CKGroupMenuVC.h */,
-				0F8A010419100284000E0028 /* CKGroupMenuVC.m */,
-				0F70DA791918458F00DD6996 /* Profile */,
-				0FE2929B190727EA00FBFC23 /* Group */,
+				0F17EA0A1947AEE000EBE443 /* CKHotBoxRootVC.h */,
+				0F17EA0B1947AEE000EBE443 /* CKHotBoxRootVC.m */,
 				0F70DA7419182A5700DD6996 /* Contacts */,
+				0F17EA111947B99400EBE443 /* CKAllEvents */,
+				0FE2929B190727EA00FBFC23 /* Group */,
 			);
-			name = Menu;
+			name = "Hot Box Root";
 			sourceTree = "<group>";
 		};
 		0F70DA7419182A5700DD6996 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				0F70DA7019182A1000DD6996 /* CKContactsVC.h */,
-				0F70DA7119182A1000DD6996 /* CKContactsVC.m */,
+				0FD01F211948DE2300ED20B3 /* CKContactsVC.h */,
+				0FD01F221948DE2300ED20B3 /* CKContactsVC.m */,
+				0F2212D01949083C00A1374D /* Cell */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -412,8 +470,8 @@
 		0F70DA7519182A7D00DD6996 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				0FE292951907251F00FBFC23 /* CKChatVC.h */,
-				0FE292961907251F00FBFC23 /* CKChatVC.m */,
+				0FD01F241948ECBF00ED20B3 /* CKChatVC.h */,
+				0FD01F251948ECD300ED20B3 /* CKChatVC.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -436,6 +494,15 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
+		0FD01F20194812E700ED20B3 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				0FD01F1D194812A800ED20B3 /* CKGroupEventsVC.h */,
+				0FD01F1E194812A900ED20B3 /* CKGroupEventsVC.m */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
 		0FE2929B190727EA00FBFC23 /* Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,8 +510,6 @@
 				0F37B6A11905DB150006444C /* CKGroupVC.m */,
 				0FE29298190727DF00FBFC23 /* CKNewGroupVC.h */,
 				0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */,
-				0F70DA7519182A7D00DD6996 /* Chat */,
-				0F70DA6F19181AA100DD6996 /* Members */,
 			);
 			name = Group;
 			sourceTree = "<group>";
@@ -551,27 +616,32 @@
 				0F44172D1905F0750090E88C /* CKMessage.m in Sources */,
 				0F37B6781905CEC30006444C /* CKAppDelegate.m in Sources */,
 				0F37B6741905CEC30006444C /* main.m in Sources */,
+				0FD01F1F194812A900ED20B3 /* CKGroupEventsVC.m in Sources */,
+				0F2212CF1948F30900A1374D /* CKGroupMemberVC.m in Sources */,
 				0F37B67B1905CEC30006444C /* Snapoll.xcdatamodeld in Sources */,
 				0F37B6A21905DB150006444C /* CKGroupVC.m in Sources */,
 				0FE292941907205F00FBFC23 /* CKGroupMemberTableVC.m in Sources */,
 				0F8FC0E31912C88900D27B80 /* CKNetworkHelper.m in Sources */,
 				0F4417361905F4770090E88C /* CKQuestion.m in Sources */,
+				0F17EA0C1947AEE000EBE443 /* CKHotBoxRootVC.m in Sources */,
+				0FD01F231948DE2300ED20B3 /* CKContactsVC.m in Sources */,
 				0F4417441905FC6D0090E88C /* CKMultipleChoice.m in Sources */,
 				0F70DA6E19181A8C00DD6996 /* CKNewMemberVC.m in Sources */,
 				0FE5281C190EBEDC0011FB9A /* CKArchiverHelper.m in Sources */,
+				0F2212D31949085F00A1374D /* CKContactsCell.m in Sources */,
 				0F4417391905F6BB0090E88C /* CKEnumerations.m in Sources */,
+				0FD01F261948ECD300ED20B3 /* CKChatVC.m in Sources */,
 				0F44173F1905F9750090E88C /* CKConstants.m in Sources */,
 				0F4417331905F46D0090E88C /* CKPoll.m in Sources */,
-				0F70DA7219182A1000DD6996 /* CKContactsVC.m in Sources */,
 				0F44172A1905F03D0090E88C /* CKUser.m in Sources */,
 				0F4417301905F3770090E88C /* CKSimpleText.m in Sources */,
-				0F8A010519100284000E0028 /* CKGroupMenuVC.m in Sources */,
 				0F4F0E59191D99C7008B4480 /* CKAddContactsTVCell.m in Sources */,
 				0FE2929A190727DF00FBFC23 /* CKNewGroupVC.m in Sources */,
 				0F8D924019136BD6002432A6 /* CKSignUpVC.m in Sources */,
 				0F4417471905FC930090E88C /* CKFreeResponse.m in Sources */,
-				0FE292971907251F00FBFC23 /* CKChatVC.m in Sources */,
+				0F17EA091947AB2F00EBE443 /* CKGroupRootVC.m in Sources */,
 				0F4417261905F0120090E88C /* CKGroup.m in Sources */,
+				0F17EA101947B95C00EBE443 /* CKAllEventsVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,8 +12,10 @@
 #import "CKGroup.h"
 #import "CKChatVC.h"
 #import "CKNetworkHelper.h"
+#import "CKHotBoxRootVC.h"
 
 @interface CKGroupVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+-(void) configureParentDelegate:(CKHotBoxRootVC*)parentVC;
 
 @end

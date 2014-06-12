@@ -8,13 +8,16 @@
 
 #import "CKGroupVC.h"
 #import "CKGroupMemberTableVC.h"
+#import "CKHotBoxRootVC.h"
 
+@interface CKGroupVC () <CKHotBoxRootVCDelegate>
 
-@interface CKGroupVC ()
-
+@property (weak, nonatomic) CKHotBoxRootVC *parentVC;
 @property (strong, nonatomic) IBOutlet UITableView *tblGroup;
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) CKUser *currentUser;
+
+@property (nonatomic, getter = isMenuOpen) BOOL menuOpen;
 
 @end
 
@@ -49,6 +52,25 @@
     [self configureTable];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
+
+#pragma mark - Delegate
+
+-(void)configureParentDelegate:(CKHotBoxRootVC *)parentVC{
+    self.parentVC = parentVC;
+    self.parentVC.delegate = self;
+}
+
+-(void)didMenuOpen:(BOOL)isOpen{
+    self.menuOpen = isOpen;
+    [self.tblGroup setEditing:NO];
+    [self.tblGroup setScrollEnabled:!self.menuOpen];
+    self.tblGroup.allowsSelection = !self.menuOpen;
+   
+}
+
 #pragma mark - Data Source
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -56,10 +78,9 @@
     return self.currentUser.groups.count;
 }
 
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"groupNameCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"groupsCell"];
     
     cell.textLabel.text = [self.currentUser.groups[indexPath.row] groupName];
     
@@ -91,17 +112,17 @@
     NSIndexPath *selectedPath = [self.tblGroup indexPathForSelectedRow];
     
     // CKChat Tab VC Properties
-    CKChatVC *chatViewController = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
-    chatViewController.selectedGroup = self.currentUser.groups[selectedPath.row];
-    chatViewController.title = [self.currentUser.groups[selectedPath.row] groupName];
+//    CKChatVC *chatViewController = [[[segue destinationViewController] viewControllers] objectAtIndex:0];
+//    chatViewController.selectedGroup = self.currentUser.groups[selectedPath.row];
+//    chatViewController.title = [self.currentUser.groups[selectedPath.row] groupName];
     
     // UITabBarController Properties
-    UITabBarController *tabVC = segue.destinationViewController;
-    tabVC.title = [self.currentUser.groups[selectedPath.row] groupName];
+//    UITabBarController *tabVC = segue.destinationViewController;
+//    tabVC.title = [self.currentUser.groups[selectedPath.row] groupName];
     
     // CKMember Tab VC Properties
-    CKGroupMemberTableVC *memberViewController = [[[segue destinationViewController] viewControllers] objectAtIndex:1];
-    memberViewController.selectedGroup = self.currentUser.groups[selectedPath.row];
+//    CKGroupMemberTableVC *memberViewController = [[[segue destinationViewController] viewControllers] objectAtIndex:1];
+//    memberViewController.selectedGroup = self.currentUser.groups[selectedPath.row];
 }
 
 #pragma mark - Memory
@@ -128,7 +149,7 @@
 -(void)configureTable{
     self.tblGroup.delegate = self;
     self.tblGroup.dataSource = self;
-    self.tblGroup.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    //self.tblGroup.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 }
 
 @end
