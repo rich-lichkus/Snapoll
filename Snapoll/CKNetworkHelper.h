@@ -37,4 +37,6 @@
 
 +(void)parseRetrieveGroupMembers:(NSString*)groupID WithCompletion:(void(^)(NSError *error))completion;
 
++(void)getUserInfo;
+
 @end

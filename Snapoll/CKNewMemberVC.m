@@ -173,12 +173,12 @@
 -(void)parseGetContactList{
     self.currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
     
-    [CKNetworkHelper parseRetrieveContacts:self.currentUser.userID WithCompletion:^(NSError *error) {
-        self.currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self.tblUserList reloadData];
-        }];
-    }];
+//    [CKNetworkHelper parseRetrieveContacts:self.currentUser.userID WithCompletion:^(NSError *error) {
+//        self.currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            [self.tblUserList reloadData];
+//        }];
+//    }];
 }
 
 #pragma mark - Lazy

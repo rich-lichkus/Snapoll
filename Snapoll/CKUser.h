@@ -26,10 +26,15 @@
 @property (strong, nonatomic) NSDate *updatedAt;        // updatedAt
 @property (strong, nonatomic) PFACL *acl;               // acl
 
-@property (strong, nonatomic) NSMutableArray *groups;           // groups
-@property (strong, nonatomic) NSMutableArray *pendingGroups;    // pendingGroups
-@property (strong, nonatomic) NSMutableArray *contacts;         // contacts
-@property (strong, nonatomic) NSMutableArray *pendingContacts;  // pendingContacts
+@property (strong, nonatomic) NSMutableArray *groups;                   // groups
+@property (strong, nonatomic) NSMutableArray *incomingGroupRequests;    // incomingGroupRequests
+
+@property (strong, nonatomic) NSMutableArray *contacts;                 // contacts
+@property (strong, nonatomic) NSMutableArray *incomingContactRequests;  // incomingContactRequests
+@property (strong, nonatomic) NSMutableArray *outgoingContactRequests;  // outgoingContactRequests
+
+@property (strong, nonatomic) NSMutableArray *allEvents; // allEvents
+@property (strong, nonatomic) NSMutableArray *allPolls;  // allPolls
 
 +(CKUser*)sharedCurrentUser;
 

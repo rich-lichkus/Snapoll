@@ -10,8 +10,13 @@
 #import "CKAllEventsVC.h"
 #import "CKContactsVC.h"
 #import "CKGroupVC.h"
+#import "CKProfileVC.h"
+#import "CKNetworkHelper.h"
 
-@interface CKHotBoxRootVC () <UIGestureRecognizerDelegate>
+@interface CKHotBoxRootVC () <UIGestureRecognizerDelegate, CKContactsVCDelegate, CKProfileVCDelegate>
+
+@property (strong, nonatomic) CKUser *currentUser;
+@property (strong, nonatomic) CKProfileVC *profileVC;
 
 @property (strong, nonatomic) CKAllEventsVC *allEventsVC;
 @property (strong, nonatomic) CKContactsVC *contactsVC;
@@ -33,6 +38,8 @@
     [self configureChildVCs];
     
     [self setupPanGesture];
+    
+    [self setupParse];
 }
 
 #pragma mark - Configure and Setup Functions
@@ -51,7 +58,7 @@
     [self.groupsVC didMoveToParentViewController:self];
     [self.view addSubview:self.groupsVC.view];
     
-    self.contactsVisible = NO;
+    self.contactsVisible = YES;
 }
 
 -(void)setupPanGesture{
@@ -68,6 +75,23 @@
     panGesture.delaysTouchesEnded = YES;
     
     [self.groupsVC.view addGestureRecognizer:panGesture];
+}
+
+-(void)setupParse{
+    // Retrieve User's Contacts, Incoming Requests, Outgoing Requests
+    [CKNetworkHelper parseRetrieveContacts:self.currentUser.userID WithCompletion:^(NSError *error) {
+        //[CKArchiverHelper saveUserDataToArchive];
+        [self.contactsVC.tblContacts reloadData];
+    }];
+    
+    // Retrieve User's Groups
+    [CKNetworkHelper parseRetrieveGroupsWithCompletion:^(NSError *error) {
+        
+    }];
+    
+    // Retrieve User's Events
+    // Retrieve User's Polls
+    
 }
 
 #pragma mark - Slide Gesture
@@ -94,17 +118,21 @@
         case UIGestureRecognizerStateChanged:
             // Open Menu Left
             if(self.groupsVC.view.frame.origin.x+viewTranslation.x>=0 &&
-               self.groupsVC.view.frame.origin.x+viewTranslation.x<= self.groupsVC.view.frame.size.width*.8)
+               self.groupsVC.view.frame.origin.x+viewTranslation.x<= self.groupsVC.view.frame.size.width*.75)
             {
-                if (!self.isContactsVisible) { [self makeContactsVCVisible]; }
+                if (!self.isContactsVisible) {
+                    [self makeContactsVCVisible];
+                }
 
                 self.groupsVC.view.center = CGPointMake(self.groupsVC.view.center.x+viewTranslation.x, self.groupsVC.view.center.y);
                 [panGesture setTranslation:CGPointMake(0, 0) inView:self.view];
             // Open Menu Right
             } else if (self.groupsVC.view.frame.origin.x+viewTranslation.x<0 &&
-                       self.groupsVC.view.frame.origin.x+viewTranslation.x>= -self.groupsVC.view.frame.size.width*.8)
+                       self.groupsVC.view.frame.origin.x+viewTranslation.x>= -self.groupsVC.view.frame.size.width*.75)
             {
-                if (self.isContactsVisible) { [self makeAllEventsVCVisible]; }
+                if (self.isContactsVisible) {
+                    [self makeAllEventsVCVisible];
+                }
                 
                 self.groupsVC.view.center = CGPointMake(self.groupsVC.view.center.x+viewTranslation.x, self.groupsVC.view.center.y);
                 [panGesture setTranslation:CGPointMake(0, 0) inView:self.view];
@@ -166,8 +194,11 @@
 //    [self.view addSubview:self.contactsVC.view];
 //    [self.view addSubview:self.groupsVC.view];
     
-    [self.view bringSubviewToFront:self.contactsVC.view];
-    [self.view bringSubviewToFront:self.groupsVC.view];
+    if(self.profileVC){
+        self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, 640, 0);
+    }
+    self.contactsVC.view.frame = CGRectOffset(self.contactsVC.view.frame, 640, 0);
+    self.allEventsVC.view.frame = CGRectOffset(self.allEventsVC.view.frame, 640, 0);
     
     self.contactsVisible = YES;
 }
@@ -178,10 +209,42 @@
 //    [self.view addSubview:self.allEventsVC.view];
 //    [self.view addSubview:self.groupsVC.view];
     
-    [self.view bringSubviewToFront:self.allEventsVC.view];
-    [self.view bringSubviewToFront:self.groupsVC.view];
-    
+    if(self.profileVC){
+        self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, -640, 0);
+    }
+    self.contactsVC.view.frame = CGRectOffset(self.contactsVC.view.frame, -640, 0);
+    self.allEventsVC.view.frame = CGRectOffset(self.allEventsVC.view.frame, -640, 0);
+
     self.contactsVisible = NO;
+}
+
+#pragma mark - Contact Delegate
+
+-(void)didSelectContact:(CKUser *)selectedContact{
+    
+    [self addChildViewController:self.profileVC];
+    [self.profileVC didMoveToParentViewController:self];
+    [self.view addSubview:self.profileVC.view];
+    
+    [self.profileVC loadSelectedContact:selectedContact];
+    
+    [UIView animateWithDuration:.4 animations:^{
+        self.profileVC.view.frame = self.view.frame;
+        self.contactsVC.view.frame = CGRectOffset(self.contactsVC.view.frame, 240, 0);
+    } completion:^(BOOL finished) {
+        [self.view bringSubviewToFront:self.groupsVC.view];
+    }];
+}
+
+#pragma mark - Profile Delegate
+
+-(void)didSelectProfileExit{
+    [UIView animateWithDuration:.4 animations:^{
+        self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, -240, 0);
+        self.contactsVC.view.frame = self.view.frame;
+    } completion:^(BOOL finished) {
+        self.profileVC = nil;
+    }];
 }
 
 #pragma mark - Lazy
@@ -189,7 +252,7 @@
 -(CKAllEventsVC *)allEventsVC{
     if(!_allEventsVC){
         _allEventsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"allEventsVC"];
-        _allEventsVC.view.frame = self.view.frame;
+        _allEventsVC.view.frame = CGRectOffset(self.view.frame, 640, 0);
     }
     return _allEventsVC;
 }
@@ -208,8 +271,18 @@
     if(!_contactsVC){
         _contactsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"contactsVC"];
         _contactsVC.view.frame = self.view.frame;
+        _contactsVC.delegate = self;
     }
     return _contactsVC;
+}
+
+-(CKProfileVC *)profileVC {
+    if(!_profileVC){
+        _profileVC = [self.storyboard instantiateViewControllerWithIdentifier:@"profileVC"];
+        _profileVC.view.frame = CGRectOffset(self.contactsVC.view.frame, -240, 0);
+        _profileVC.delegate = self;
+    }
+    return _profileVC;
 }
 
 #pragma mark - Memory

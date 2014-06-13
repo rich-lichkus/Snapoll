@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol CKHotBoxRootVCDelegate <NSObject>
-
+@required
 -(void)didMenuOpen:(BOOL)isOpen;
 
 @end

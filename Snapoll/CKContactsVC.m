@@ -12,7 +12,7 @@
 @interface CKContactsVC () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) CKUser *currentUser;
-@property (weak, nonatomic) IBOutlet UITableView *tblContacts;
+
 
 @end
 
@@ -50,30 +50,85 @@
 
 #pragma mark - Table view data source
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3; // Incoming, Contacts + Outgoing (arrow badge)
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.currentUser.contacts.count;
+    NSInteger numRows = 0;
+    switch (section) {
+        case 0:
+            numRows = self.currentUser.incomingContactRequests.count;
+            break;
+        case 1:
+            numRows = self.currentUser.contacts.count;
+            break;
+        case 2:
+            numRows = self.currentUser.outgoingContactRequests.count;
+            break;
+    }
+    return numRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CKContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"contactsCell" forIndexPath:indexPath];
     
-    CKUser *currentContact = self.currentUser.contacts[indexPath.row];
+    CKUser *currentContact;
     
-    cell.imgAvatar.layer.shouldRasterize = YES;
+    switch (indexPath.section) {
+        case 0: { // Incoming Requests
+            currentContact  = self.currentUser.incomingContactRequests[indexPath.row];
+            [cell.imgBadge setHidden:NO];
+            cell.imgBadge.image = [UIImage imageNamed:@"download"];
+            cell.imgBadge.layer.cornerRadius = cell.imgBadge.frame.size.height/2;
+            cell.imgBadge.layer.masksToBounds = YES;
+            cell.lblDisplayName.textColor = [UIColor lightTextColor];
+        }
+            break;
+        case 1: { // Contacts
+            currentContact  = self.currentUser.contacts[indexPath.row];
+            [cell.imgBadge setHidden:YES];
+            cell.lblDisplayName.textColor = [UIColor whiteColor];
+        }
+            break;
+        case 2: { // Outgoing
+            currentContact = self.currentUser.outgoingContactRequests[indexPath.row];
+            cell.imgBadge.image = [UIImage imageNamed:@"upload"];
+            [cell.imgBadge setHidden:NO];
+            cell.imgBadge.layer.cornerRadius = cell.imgBadge.frame.size.height/2;
+            cell.imgBadge.layer.masksToBounds = YES;
+            cell.lblDisplayName.textColor = [UIColor lightTextColor];
+        }
+            break;
+    }
+
     cell.imgAvatar.image = [UIImage imageNamed:@"placeholder"];
     cell.imgAvatar.layer.cornerRadius = cell.imgAvatar.frame.size.height/2;
     cell.imgAvatar.layer.masksToBounds = YES;
-    cell.lblDisplayName.text = [[[currentContact firstName] stringByAppendingString: @" " ] stringByAppendingString: currentContact.lastName];
-    cell.imgBadge.layer.cornerRadius = cell.imgBadge.frame.size.height/2;
-    cell.imgBadge.layer.masksToBounds = YES;
-    
-    
-    
+    cell.lblDisplayName.text = [[[currentContact firstName] stringByAppendingString: @" "] stringByAppendingString: currentContact.lastName];
+
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CKUser *selectedContact;
+    switch (indexPath.section) {
+        case 0:
+            selectedContact = self.currentUser.incomingContactRequests[indexPath.row];
+            break;
+        case 1:
+            selectedContact = self.currentUser.contacts[indexPath.row];
+            break;
+        case 2:
+            selectedContact = self.currentUser.outgoingContactRequests[indexPath.row];
+            break;
+    }
+    
+    [self.delegate didSelectContact:selectedContact];
+}
 
 /*
  // Override to support conditional editing of the table view.
@@ -137,9 +192,6 @@
         }];
     }];
     
-    //    [CKNetworkHelper parseRetrieveContactRequests:self.currentUser.userID withCompletion:^(NSError *error){
-    //
-    //    }];
 }
 
 #pragma mark - Memory

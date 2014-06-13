@@ -12,6 +12,7 @@
 		0F17EA101947B95C00EBE443 /* CKAllEventsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F17EA0F1947B95C00EBE443 /* CKAllEventsVC.m */; };
 		0F2212CF1948F30900A1374D /* CKGroupMemberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2212CE1948F30900A1374D /* CKGroupMemberVC.m */; };
 		0F2212D31949085F00A1374D /* CKContactsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2212D21949085F00A1374D /* CKContactsCell.m */; };
+		0F2E1735194AD04900EA489C /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2E1734194AD04900EA489C /* CoreImage.framework */; };
 		0F37B6661905CEC30006444C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F37B6651905CEC30006444C /* Foundation.framework */; };
 		0F37B6681905CEC30006444C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F37B6671905CEC30006444C /* CoreGraphics.framework */; };
 		0F37B66A1905CEC30006444C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F37B6691905CEC30006444C /* UIKit.framework */; };
@@ -84,6 +85,7 @@
 		0F2212CE1948F30900A1374D /* CKGroupMemberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupMemberVC.m; sourceTree = "<group>"; };
 		0F2212D11949085F00A1374D /* CKContactsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKContactsCell.h; sourceTree = "<group>"; };
 		0F2212D21949085F00A1374D /* CKContactsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKContactsCell.m; sourceTree = "<group>"; };
+		0F2E1734194AD04900EA489C /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		0F37B6621905CEC30006444C /* Snapoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F37B6651905CEC30006444C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F37B6671905CEC30006444C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -166,10 +168,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F8FC0F21912D22F00D27B80 /* QuartzCore.framework in Frameworks */,
+				0F2E1735194AD04900EA489C /* CoreImage.framework in Frameworks */,
 				0F8FC0F81912D24600D27B80 /* SystemConfiguration.framework in Frameworks */,
 				0F8FC0F61912D23D00D27B80 /* StoreKit.framework in Frameworks */,
 				0F8FC0F41912D23600D27B80 /* Security.framework in Frameworks */,
-				0F8FC0F21912D22F00D27B80 /* QuartzCore.framework in Frameworks */,
 				0F8FC0F01912D22700D27B80 /* MobileCoreServices.framework in Frameworks */,
 				0F8FC0EE1912D21C00D27B80 /* libz.dylib in Frameworks */,
 				0F8FC0EC1912D21200D27B80 /* CoreLocation.framework in Frameworks */,
@@ -256,6 +259,7 @@
 		0F37B6641905CEC30006444C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F2E1734194AD04900EA489C /* CoreImage.framework */,
 				0F8FC0F71912D24600D27B80 /* SystemConfiguration.framework */,
 				0F8FC0F51912D23D00D27B80 /* StoreKit.framework */,
 				0F8FC0F31912D23600D27B80 /* Security.framework */,
@@ -327,10 +331,10 @@
 				0F8D923F19136BD6002432A6 /* CKSignUpVC.m */,
 				0FE2929C19076CA100FBFC23 /* CKLoginVC.h */,
 				0FE2929D19076CA100FBFC23 /* CKLoginVC.m */,
+				0F70DA791918458F00DD6996 /* Profile */,
 				0F70DA7319182A1B00DD6996 /* Hot Box Root */,
 				0F17EA0D1947B86500EBE443 /* Group Root */,
 				0F17EA121947B9B600EBE443 /* Obsolete */,
-				0F70DA791918458F00DD6996 /* Profile */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";

@@ -10,6 +10,15 @@
 #import <Parse/Parse.h>
 #import "CKNetworkHelper.h"
 
+@protocol CKContactsVCDelegate <NSObject>
+
+-(void)didSelectContact:(CKUser*)selectedContact;
+
+@end
+
 @interface CKContactsVC : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITableView *tblContacts;
+@property (nonatomic, unsafe_unretained) id<CKContactsVCDelegate> delegate;
 
 @end

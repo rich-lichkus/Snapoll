@@ -12,13 +12,123 @@
 
 @implementation CKNetworkHelper
 
-/// Login User
+//--------------------------------------------------------------------------------------------------------------
+// User Level
+//--------------------------------------------------------------------------------------------------------------
+
+// Login
+//--------------------------------------------------------------------
+
 +(void)parseLogInWithUsername:(NSString*)username andPassword:(NSString*)password completionBlock:(void(^)(PFUser *user, NSError *error))completion{
 
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         completion(user, error);
     }];
 }
+
+// Retrieve Contacts, Incoming Requests, Outgoing Requests
+//--------------------------------------------------------------------
+
++(void)parseRetrieveContacts:(NSString*)userID WithCompletion:(void(^)(NSError *error))completion{
+    
+    CKUser *currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
+    
+    // Retrieve Contacts
+    PFRelation *contactRelation = [[PFUser currentUser] relationForKey:@"contacts"];
+    PFQuery *cRelation = contactRelation.query;
+    [cRelation orderByAscending:@"firstName"];
+    [cRelation findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        [currentUser.contacts removeAllObjects];
+        
+        for(PFObject *contact in objects){
+                CKUser *newMember = [[CKUser alloc]init];
+                newMember.userID = contact.objectId;
+                newMember.userName = contact[@"username"];
+                newMember.firstName = contact[@"firstName"];
+                newMember.lastName = contact[@"lastName"];
+                newMember.updatedAt = contact.updatedAt;
+                newMember.createdAt = contact.createdAt;
+                [currentUser.contacts addObject:newMember];
+        }
+        completion(error);
+    }];
+    
+    // Retreive Contact Incoming Requests
+    PFQuery *contactInvitationQuery = [PFQuery queryWithClassName:@"ContactInvitations"];
+    [contactInvitationQuery whereKey:@"to_user" equalTo:[PFUser currentUser]];
+    [contactInvitationQuery includeKey:@"from_user"];
+    [contactInvitationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        [currentUser.incomingContactRequests removeAllObjects];
+        
+        for(PFObject *invitation in objects){
+            
+            PFUser *contact = invitation[@"from_user"];
+            
+            CKUser *newMember = [[CKUser alloc]init];
+            newMember.userID = contact.objectId;
+            newMember.userName = contact[@"username"];
+            newMember.firstName = contact[@"firstName"];
+            newMember.lastName = contact[@"lastName"];
+            newMember.updatedAt = contact.updatedAt;
+            newMember.createdAt = contact.createdAt;
+            [currentUser.incomingContactRequests addObject:newMember];
+        }
+        completion(error);
+    }];
+    
+    // Retreive Contact Outgoing Requests
+    PFQuery *contactOutgoingInvitationQuery = [PFQuery queryWithClassName:@"ContactInvitations"];
+    [contactOutgoingInvitationQuery whereKey:@"from_user" equalTo:[PFUser currentUser]];
+    [contactOutgoingInvitationQuery includeKey:@"to_user"];
+    [contactOutgoingInvitationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        [currentUser.outgoingContactRequests removeAllObjects];
+        
+        for(PFObject *invitation in objects){
+            
+            PFUser *contact = invitation[@"to_user"];
+            
+            CKUser *newMember = [[CKUser alloc]init];
+            newMember.userID = contact.objectId;
+            newMember.userName = contact[@"username"];
+            newMember.firstName = contact[@"firstName"];
+            newMember.lastName = contact[@"lastName"];
+            newMember.updatedAt = contact.updatedAt;
+            newMember.createdAt = contact.createdAt;
+            [currentUser.outgoingContactRequests addObject:newMember];
+        }
+        completion(error);
+    }];
+    
+//    // add in pointer invitation to and from
+//    PFQuery *userq = [PFUser query];
+//    [userq getObjectInBackgroundWithId:@"FsrM2q4mvH" block:^(PFObject *object, NSError *error) {
+//        PFObject *newInvitation = [PFObject objectWithClassName:@"ContactInvitations"];
+//        newInvitation[@"from_user"] = [PFUser currentUser];
+//        newInvitation[@"to_user"] = object;
+//        [newInvitation saveInBackground];
+//    }];
+    
+}
+
+//--------------------------------------------------------------------
+// Group Level
+//--------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /// Retrieve Groups for a User
 +(void)parseRetrieveGroupsWithCompletion:(void(^)(NSError *error))completion {
@@ -142,50 +252,6 @@
     }];
 }
 
-// Contacts
-+(void)parseRetrieveContacts:(NSString*)userID WithCompletion:(void(^)(NSError *error))completion{
-    
-    CKUser *currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
-    
-    //PFRelation get members
-    PFRelation *contactRelation = [[PFUser currentUser] relationForKey:@"contacts"];
-    
-    PFQuery *cRelation = contactRelation.query;
-    [cRelation orderByAscending:@"firstName"];
-    [cRelation findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
-        [currentUser.contacts removeAllObjects];
-        
-        for(PFObject *contact in objects){
-            CKUser *ckContact = [currentUser getContactWithId:contact.objectId];
-           
-            if(ckContact) {
-                ckContact.userName = contact[@"username"];
-                ckContact.firstName = contact[@"firstName"];
-                ckContact.lastName = contact[@"lastName"];
-                ckContact.updatedAt = contact.updatedAt;
-                ckContact.createdAt = contact.createdAt;
-            } else {
-                CKUser *newMember = [[CKUser alloc]init];
-                newMember.userID = contact.objectId;
-                newMember.userName = contact[@"username"];
-                newMember.firstName = contact[@"firstName"];
-                newMember.lastName = contact[@"lastName"];
-                newMember.updatedAt = contact.updatedAt;
-                newMember.createdAt = contact.createdAt;
-                [currentUser.contacts addObject:newMember];
-            }
-        }
-        completion(error);
-    }];
-    
-    
-    
-    
-}
-
-
-
 
 
 //------------------------------------
@@ -236,6 +302,94 @@
     
 }
 
++(void)getUserInfo{
+    
+    CKUser *currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
+//
+//    // Retrieve Groups
+//    
+//    PFRelation *groupRelation = [[PFUser currentUser ]relationForKey:@"groups"];
+//    PFQuery *pendingMemberQuery = [groupRelation query];
+//    [pendingMemberQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        
+//    }];
+    
+    // Retrieve incoming contact requests
+    
+//    PFQuery *contactInvitationQuery = [PFQuery queryWithClassName:@"ContactInvitations"];
+//    [contactInvitationQuery whereKey:@"to_user_id" equalTo:[PFUser currentUser].objectId];
+//    [contactInvitationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        for(PFObject *userId in objects){
+//            PFQuery *user = [PFUser query];
+//            [user getObjectInBackgroundWithId:userId[@"to_user_id"] block:^(PFObject *object, NSError *error) {
+//                [currentUser.incomingContactRequests addObject:object];
+//            }];
+//        }
+//    }];
+    
+    // This all invitations to current user
+//    PFQuery *contactInvitationQuery = [PFQuery queryWithClassName:@"ContactInvitations"];
+//    [contactInvitationQuery whereKey:@"to_user_id" equalTo:[PFUser currentUser].objectId];
+//
+//    // get the user that matches the from_user
+//    PFQuery *fromUserQuery = [PFQuery queryWithClassName:@"_User"];
+//    [fromUserQuery whereKey:@"objectId" matchesKey:@"from_user_id" inQuery:contactInvitationQuery];
+//    
+//    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects: fromUserQuery, nil]];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        NSLog(@"%@",objects[0][@"username"]);
+//    }];
+    
+    
+    //*******
+    // Model pointer with included primitives and nested pointers
+    //*******
+    
+//    PFQuery *contactInvitationQuery = [PFQuery queryWithClassName:@"ContactInvitations"];
+//    [contactInvitationQuery whereKey:@"to_user" equalTo:[PFUser currentUser]];
+//    [contactInvitationQuery includeKey:@"from_user"];
+//    [contactInvitationQuery includeKey:@"from_user.groups"];
+//    [contactInvitationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        
+//        [currentUser.incomingContactRequests removeAllObjects];
+//        
+//        for(PFObject *invitation in objects){
+//            [currentUser.incomingContactRequests addObject:invitation[@"from_user"]];
+//        
+//        }
+//        
+////        NSLog(@"%@",objects[0][@"from_user"][@"groups"][0][@"name"]); // Not allowed, groups is relational
+//        
+//    }];
+    
+    
+    //******
+    // relational data
+    //*******
+    
+//    PFRelation *usersContactRelation = [[PFUser currentUser] relationForKey:@"contacts"];
+//    PFRelation *usersGroupsRelation = [[PFUser currentUser] relationForKey:@"groups"];
+//    
+//    PFQuery *getUserData = [usersContactRelation query];
+//    [getUserData findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        
+//    }];
+    
+//    [contactInvitationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        
+//        for(PFObject *userObject in objects){
+//            
+////            PFQuery *user = [PFUser query];
+////            [user getObjectInBackgroundWithId:userId[@"to_user_id"] block:^(PFObject *object, NSError *error) {
+////                [currentUser.incomingContactRequests addObject:object];
+////            }];
+//        }
+//    }];
+    
+    // Retreive outgoing contact requests
+
+}
+
 //    /// Add contacts to user
 //
 //    PFUser *currentUser = [PFUser currentUser];
@@ -257,6 +411,34 @@
 //            PFRelation *relation = [user relationforKey:@"groups"];
 //            [relation addObject:group];
 //            [user saveInBackground];
+//        }
+//    }];
+
+//    PFQuery *inContactRequest = [PFQuery queryWithClassName:@"ContactInvitations"];
+//    [inContactRequest whereKey:@"to_user_id" equalTo:currentUser.userID];
+//    [inContactRequest findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if(objects.count>0) {
+//            for(PFObject *contactInvite in objects){
+//                PFQuery *queryUser = [PFQuery queryWithClassName:@"User"];
+//                [queryUser whereKey:@"objectId" equalTo: contactInvite[@"from_user_id"]];
+//                [queryUser findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//                    if(objects.count>0){
+//
+//                        [currentUser.incomingContactRequests removeAllObjects];
+//
+//                        for(PFObject *contact in objects){
+//                            CKUser *newMember = [[CKUser alloc]init];
+//                                newMember.userID = contact.objectId;
+//                                newMember.userName = contact[@"username"];
+//                                newMember.firstName = contact[@"firstName"];
+//                                newMember.lastName = contact[@"lastName"];
+//                                newMember.updatedAt = contact.updatedAt;
+//                                newMember.createdAt = contact.createdAt;
+//                                [currentUser.incomingContactRequests addObject:newMember];
+//                        }
+//                    }
+//                }];
+//            }
 //        }
 //    }];
 

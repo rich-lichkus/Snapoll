@@ -40,11 +40,11 @@
     return _groups;
 }
 
--(NSMutableArray *)pendingGroups{
-    if(!_pendingGroups){
-        _pendingGroups = [[NSMutableArray alloc] init];
+-(NSMutableArray *)incomingGroupRequests{
+    if(!_incomingGroupRequests){
+        _incomingGroupRequests = [[NSMutableArray alloc] init];
     }
-    return _pendingGroups;
+    return _incomingGroupRequests;
 }
 
 -(NSMutableArray *)contacts{
@@ -54,11 +54,32 @@
     return _contacts;
 }
 
--(NSMutableArray *)pendingContacts{
-    if(!_pendingContacts){
-        _pendingContacts = [[NSMutableArray alloc] init];
+-(NSMutableArray *)incomingContactRequests{
+    if(!_incomingContactRequests){
+        _incomingContactRequests = [[NSMutableArray alloc] init];
     }
-    return _pendingContacts;
+    return _incomingContactRequests;
+}
+
+-(NSMutableArray *)outgoingContactRequests{
+    if(!_outgoingContactRequests){
+        _outgoingContactRequests = [[NSMutableArray alloc] init];
+    }
+    return _outgoingContactRequests;
+}
+
+-(NSMutableArray *)allEvents{
+    if(!_allEvents){
+        _allEvents = [[NSMutableArray alloc] init];
+    }
+    return _allEvents;
+}
+
+-(NSMutableArray *)allPolls{
+    if(!_allPolls){
+        _allPolls = [[NSMutableArray alloc] init];
+    }
+    return _allPolls;
 }
 
 #pragma mark - NSCoder
@@ -77,11 +98,14 @@
         self.facebookHandle  = [aDecoder decodeObjectForKey:@"facebookHandle"];
         
         self.groups = [aDecoder decodeObjectForKey:@"groups"];
-        self.pendingGroups = [aDecoder decodeObjectForKey:@"pendingGroups"];
+        self.incomingGroupRequests = [aDecoder decodeObjectForKey:@"incomingGroupRequests"];
         self.contacts = [aDecoder decodeObjectForKey:@"contacts"];
-        self.pendingContacts = [aDecoder decodeObjectForKey:@"pendingContacts"];
+        self.incomingContactRequests = [aDecoder decodeObjectForKey:@"incomingContactRequests"];
+        self.outgoingContactRequests = [aDecoder decodeObjectForKey:@"outgoingContactRequests"];
+        self.allEvents = [aDecoder decodeObjectForKey:@"allEvents"];
+        self.allPolls   = [aDecoder decodeObjectForKey:@"allPolls"];
         
-        self.createdAt = [aDecoder decodeObjectForKey:@"createdAt"];
+        self.createdAt = [aDecoder decodeObjectForKey:@"crxeatedAt"];
         self.updatedAt = [aDecoder decodeObjectForKey:@"updatedAt"];
         self.acl = [aDecoder decodeObjectForKey:@"acl"];
     
@@ -102,9 +126,12 @@
     [aCoder encodeObject:self.facebookHandle forKey:@"facebookHandle"];
     
     [aCoder encodeObject:self.groups forKey:@"groups"];
-    [aCoder encodeObject:self.pendingGroups forKey:@"pendingGroups"];
+    [aCoder encodeObject:self.incomingGroupRequests forKey:@"incomingGroupRequests"];
     [aCoder encodeObject:self.contacts forKey:@"contacts"];
-    [aCoder encodeObject:self.pendingContacts forKey:@"pendingContacts"];
+    [aCoder encodeObject:self.incomingContactRequests forKey:@"incomingContactRequests"];
+    [aCoder encodeObject:self.outgoingContactRequests forKey:@"outgoingContactRequests"];
+    [aCoder encodeObject:self.allEvents forKey:@"allEvents"];
+    [aCoder encodeObject:self.allPolls forKey:@"allPolls"];
     
     [aCoder encodeObject:self.createdAt forKey:@"createdAt"];
     [aCoder encodeObject:self.updatedAt forKey:@"updatedAt"];
@@ -184,7 +211,7 @@
     group.updatedAt = pfGroup.updatedAt;
     group.acl = pfGroup.ACL;
     
-    [self.pendingContacts addObject:group];
+    [self.incomingGroupRequests addObject:group];
     
     [CKArchiverHelper saveUserDataToArchive];
 }
@@ -198,7 +225,6 @@
     }
     return nil;
 }
-
 
 
 @end
