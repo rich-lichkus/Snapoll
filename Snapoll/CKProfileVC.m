@@ -14,14 +14,16 @@
 
 @property (weak, nonatomic) CKUser *selectedContact;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnFriend;
+@property (weak, nonatomic) IBOutlet UIButton *btnDecline;
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatarMain;
-@property (weak, nonatomic) IBOutlet UIView *uivAlpha;
-@property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblLocation;
 @property (weak, nonatomic) IBOutlet UILabel *lblUsername;
 @property (weak, nonatomic) IBOutlet UILabel *lblFullname;
 - (IBAction)pressedBack:(id)sender;
+- (IBAction)pressedContactBtn:(id)sender;
+- (IBAction)pressedDeclineContactBtn:(id)sender;
 
 @end
 
@@ -60,16 +62,87 @@
     [self.delegate didSelectProfileExit];
 }
 
+- (IBAction)pressedContactBtn:(id)sender {
+    switch (self.selectedContact.userStatus) {
+        case kUserStatusContact:{
+            // Remove Contact
+            // Delete selected contact from current user
+        }
+            break;
+        case kUserStatusIncomingContactRequest: {
+            // Yes
+            // Add selected contact to current user contacts
+            // Add current user to selected contacts contacts
+            
+        }
+            break;
+        case kUserStatusOutgoingContactRequest: {
+            // Cancel Request
+            // Delete contact invitation
+        }
+            break;
+        case kUserStatusNotContact: {
+            // Add Contact
+            // Create contact request
+        }
+            break;
+    }
+}
+
+- (IBAction)pressedDeclineContactBtn:(id)sender {
+}
+
 #pragma mark - Load
 
 -(void)loadSelectedContact:(CKUser*)selectedContact{
     self.selectedContact = selectedContact;
     self.lblUsername.text = self.selectedContact.userName;
-    self.lblName.text = self.selectedContact.firstName;
+//    self.lblName.text = self.selectedContact.firstName;
     self.lblFullname.text = [[self.selectedContact.firstName stringByAppendingString:@" "] stringByAppendingString:self.selectedContact.lastName];
-    self.imgAvatar.image = [self blur:[UIImage imageNamed:@"avatar"]];
+    self.imgAvatar.image = [self blur:[UIImage imageNamed:@"sf"]];
     self.imgAvatar.frame = CGRectMake(0, 20, 240, 274);
-    self.imgAvatarMain.image = [UIImage imageNamed:@"avatar"];
+    self.imgAvatarMain.image = [UIImage imageNamed:@"sf"];
+    
+    switch (self.selectedContact.userStatus) {
+        case kUserStatusContact: {
+            [self.btnFriend setTitle:@"Remove Contact" forState:UIControlStateNormal];
+            self.btnFriend.frame = CGRectMake(self.btnFriend.frame.origin.x,
+                                              self.btnFriend.frame.origin.y,
+                                              150,
+                                              self.btnFriend.frame.size.height);
+            [self.btnDecline setHidden:YES];
+        }
+            break;
+        case kUserStatusIncomingContactRequest: {
+            [self.btnFriend setTitle:@"Yes" forState:UIControlStateNormal];
+            self.btnFriend.frame = CGRectMake(self.btnFriend.frame.origin.x,
+                                              self.btnFriend.frame.origin.y,
+                                              73,
+                                              self.btnFriend.frame.size.height);
+            [self.btnDecline setHidden:NO];
+        }
+            break;
+        case kUserStatusOutgoingContactRequest: {
+            [self.btnFriend setTitle:@"Cancel Request" forState:UIControlStateNormal];
+            self.btnFriend.frame = CGRectMake(self.btnFriend.frame.origin.x,
+                                              self.btnFriend.frame.origin.y,
+                                              150,
+                                              self.btnFriend.frame.size.height);
+            [self.btnDecline setHidden:YES];
+        }
+            break;
+        case kUserStatusNotContact: {
+
+            [self.btnFriend setTitle:@"Add Contact" forState:UIControlStateNormal];
+            self.btnFriend.frame = CGRectMake(self.btnFriend.frame.origin.x,
+                                              self.btnFriend.frame.origin.y,
+                                              150,
+                                              self.btnFriend.frame.size.height);
+            [self.btnDecline setHidden:YES];
+        }
+            break;
+    }
+    
 }
 
 #pragma mark - Image
@@ -86,7 +159,7 @@
     // setting up Gaussian Blur (we could use one of many filters offered by Core Image)
     CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
     [filter setValue:inputImage forKey:kCIInputImageKey];
-    [filter setValue:[NSNumber numberWithFloat:5.0f] forKey:@"inputRadius"];
+    [filter setValue:[NSNumber numberWithFloat:25.0f] forKey:@"inputRadius"];
     CIImage *result = [filter valueForKey:kCIOutputImageKey];
     
     // CIGaussianBlur has a tendency to shrink the image a little,

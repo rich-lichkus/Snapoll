@@ -7,17 +7,20 @@
 //
 
 #import "CKChatVC.h"
-
+#import "CKHotBoxRootVC.h"
 #import "CKUser.h"
 #import "CKAppDelegate.h"
 
-@interface CKChatVC ()
+@interface CKChatVC () <CKGroupRootVCDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) CKAppDelegate *appDelegate;
-@property (strong, nonatomic) CKUser *currentUser;
+@property (weak, nonatomic) CKAppDelegate *appDelegate;
+@property (weak, nonatomic) CKUser *currentUser;
+@property (weak, nonatomic) CKGroupRootVC *parentVC;
 
+@property (weak, nonatomic) IBOutlet UITableView *tblMessages;
 @property (strong, nonatomic) IBOutlet UIView *vwMessageButtons;
 @property (strong, nonatomic) IBOutlet UITextField *txtMessage;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 - (IBAction)pressedAdd:(id)sender;
 - (IBAction)pressedSend:(id)sender;
@@ -36,44 +39,62 @@
     return self;
 }
 
+#pragma mark - Views
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self configureTableView];
     
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     self.currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
     
     self.txtMessage.delegate = self;
-    self.colMessages.delegate = self;
-    self.colMessages.dataSource = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
+#pragma mark - Configure group root
+
+-(void) configureParentDelegate:(CKGroupRootVC*)parentVC{
+    self.parentVC = parentVC;
+    self.parentVC.delegate = self;
+    self.navBar.topItem.title = self.parentVC.selectedGroup.groupName;
 }
 
-#pragma mark - Collection View DataSource
+#pragma mark - Configure Table View
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+-(void)configureTableView {
+    self.tblMessages.delegate = self;
+    self.tblMessages.dataSource = self;
+}
+
+#pragma mark - Delegate Group Root
+
+-(void)didMenuOpen:(BOOL)isOpen{
+    
+}
+
+#pragma mark - Delegate Table View
+
+
+#pragma mark - Datasource Table View
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"message" forIndexPath:indexPath];
-    
-    cell.backgroundColor = [UIColor blueColor];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell"];
+    cell.textLabel.text = @"Hello";
     
     return cell;
 }
 
+#pragma mark - Navigation
+
 /*
- #pragma mark - Navigation
- 
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
  {
@@ -82,7 +103,7 @@
  }
  */
 
-#pragma mark - Buttons
+#pragma mark - Actions
 
 - (IBAction)pressedAdd:(id)sender {
  
@@ -135,8 +156,12 @@
                      } completion:NULL];
 }
 
+#pragma mark - Memory
 
-
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
 
 
 @end

@@ -31,21 +31,28 @@
     return self;
 }
 
+-(instancetype)initPrimitivesWithPFUser:(PFUser*)pfUser{
+    self  = [super init];
+    if (self) {
+        self.userID = pfUser.objectId;
+        self.userName = pfUser[@"username"];
+        self.firstName = pfUser[@"firstName"];
+        self.lastName = pfUser[@"lastName"];
+        self.email = pfUser[@"email"];
+        self.emailVerified = (BOOL)pfUser[@"emailVerified"];
+        self.twitterHandle = pfUser[@"twitterHandle"];
+        self.facebookHandle = pfUser[@"facebookHandle"];
+        
+        self.createdAt = pfUser.createdAt;
+        self.updatedAt = pfUser.updatedAt;
+        self.acl = pfUser.ACL;
+    
+    }
+    return self;
+}
+
+
 #pragma mark - Lazy Instantiation
-
--(NSMutableArray *)groups{
-    if(!_groups){
-        _groups = [[NSMutableArray alloc] init];
-    }
-    return _groups;
-}
-
--(NSMutableArray *)incomingGroupRequests{
-    if(!_incomingGroupRequests){
-        _incomingGroupRequests = [[NSMutableArray alloc] init];
-    }
-    return _incomingGroupRequests;
-}
 
 -(NSMutableArray *)contacts{
     if(!_contacts){
@@ -139,35 +146,63 @@
 
 }
 
-//-- User methods
+// ------------------------------------------------------
+// User Methods
+// ------------------------------------------------------
 
--(void)updateCurrentUserWithPFUser:(PFUser*)user{
+// Update current user
+// ------------------------------------------------------
+-(void)updateCurrentUserWithPFUser:(PFUser*)pfUser{
     
-    self.userID = user.objectId;
-    self.userName = user[@"username"];
-    self.firstName = user[@"firstName"];
-    self.lastName = user[@"lastName"];
-    self.email = user[@"email"];
-    self.emailVerified = user[@"emailVerified"];
-    self.twitterHandle = user[@"twitterHandle"];
-    self.facebookHandle = user[@"facebookHandle"];
+    self.userID = pfUser.objectId;
+    self.userName = pfUser[@"username"];
+    self.firstName = pfUser[@"firstName"];
+    self.lastName = pfUser[@"lastName"];
+    self.email = pfUser[@"email"];
+    self.emailVerified = pfUser[@"emailVerified"];
+    self.twitterHandle = pfUser[@"twitterHandle"];
+    self.facebookHandle = pfUser[@"facebookHandle"];
     
-    self.createdAt = user.createdAt;
-    self.updatedAt = user.updatedAt;
-    self.acl = user.ACL;
+    self.createdAt = pfUser.createdAt;
+    self.updatedAt = pfUser.updatedAt;
+    self.acl = pfUser.ACL;
 }
 
-//-- Group methods
+// ------------------------------------------------------
+// Contact Methods
+// ------------------------------------------------------
 
-- (CKGroup*)getGroupWithId:(NSString*)groupID{
-    for(CKGroup *group in self.groups){
-        if([group.groupID isEqualToString:groupID]){
-            return group;
+// Get contact status
+// ------------------------------------------------------
+- (kUserStatus) getContactStatusForUserId:(NSString*)userId{
+    
+    for(CKUser *ckUser in self.contacts){
+        if([ckUser.userID isEqualToString:userId]){
+            return kUserStatusContact;
         }
     }
-    return nil;
+    
+    for(CKUser *ckUser in self.incomingContactRequests){
+        if([ckUser.userID isEqualToString:userId]){
+            return kUserStatusIncomingContactRequest;
+        }
+    }
+    
+    for(CKUser *ckUser in self.outgoingContactRequests){
+        if([ckUser.userID isEqualToString:userId]){
+            return kUserStatusOutgoingContactRequest;
+        }
+    }
+    
+    return kUserStatusNotContact;
 }
 
+// ------------------------------------------------------
+// Group Methods
+// ------------------------------------------------------
+
+// Add Group
+// ------------------------------------------------------
 - (void)addGroupWithPFObject:(PFObject*)pfGroup{
     
     CKGroup *group = [[CKGroup alloc] init];
@@ -180,9 +215,39 @@
     group.acl = pfGroup.ACL;
     
     [self.groups addObject:group];
-    
-    [CKArchiverHelper saveUserDataToArchive];
 }
+
+// Delete Group
+// ------------------------------------------------------
+
+
+// Find Group
+// ------------------------------------------------------
+- (CKGroup*)getGroupWithId:(NSString*)groupID{
+    for(CKGroup *group in self.groups){
+        if([group.groupID isEqualToString:groupID]){
+            return group;
+        }
+    }
+    return nil;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-- Group methods
+
+
 
 - (void)updateCKGroup:(CKGroup*)ckGroup WithPFObject:(PFObject *)pfGroup{
     

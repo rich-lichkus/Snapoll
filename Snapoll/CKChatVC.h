@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #import "CKGroup.h"
+#import "CKGroupRootVC.h"
+@class CKGroupRootVC;
 
-@interface CKChatVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
+@interface CKChatVC : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
-@property (strong, nonatomic) IBOutlet UICollectionView *colMessages;
-@property (strong, nonatomic) CKGroup *selectedGroup;
+-(void) configureParentDelegate:(CKGroupRootVC*)parentVC;
 
 @end

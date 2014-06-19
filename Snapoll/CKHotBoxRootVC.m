@@ -243,6 +243,8 @@
         self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, -240, 0);
         self.contactsVC.view.frame = self.view.frame;
     } completion:^(BOOL finished) {
+        [self.profileVC removeFromParentViewController];
+        [self.profileVC.view removeFromSuperview];
         self.profileVC = nil;
     }];
 }

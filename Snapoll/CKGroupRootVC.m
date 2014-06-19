@@ -7,15 +7,16 @@
 //
 
 #import "CKGroupRootVC.h"
-#import "CKGroupMemberTableVC.h"
+#import "CKGroupMemberVC.h"
 #import "CKGroupEventsVC.h"
-#import "CKChatVC.h"
+#import "CKProfileVC.h"
+#import "CKNetworkHelper.h"
 
-@interface CKGroupRootVC () <UIGestureRecognizerDelegate>
+@interface CKGroupRootVC () <UIGestureRecognizerDelegate, CKProfileVCDelegate>
 
-@property (strong, nonatomic) CKGroupMemberTableVC *groupMemberVC;
+@property (strong, nonatomic) CKProfileVC *profileVC;
+@property (strong, nonatomic) CKGroupMemberVC *groupMemberVC;
 @property (strong, nonatomic) CKGroupEventsVC *groupEventsVC;
-@property (strong, nonatomic) CKChatVC *chatVC;
 
 @property (nonatomic, getter = isMenuOpen) BOOL menuOpen;
 @property (nonatomic, getter = isMembersVisible) BOOL membersVisible;
@@ -30,8 +31,10 @@
     [super viewDidLoad];
     
     [self configureChildVCs];
-    
+
     [self setupPanGesture];
+    
+    [self setupParse];
 }
 
 #pragma mark - Configure and Setup Functions
@@ -41,6 +44,7 @@
     [self addChildViewController:self.groupMemberVC];
     [self.groupMemberVC didMoveToParentViewController:self];
     [self.view addSubview:self.groupMemberVC.view];
+    self.groupMemberVC.parentVC = self;
     
     [self addChildViewController:self.groupEventsVC];
     [self.groupEventsVC didMoveToParentViewController:self];
@@ -50,7 +54,7 @@
     [self.chatVC didMoveToParentViewController:self];
     [self.view addSubview:self.chatVC.view];
     
-    self.membersVisible = NO;
+    self.membersVisible = YES;
 }
 
 -(void)setupPanGesture{
@@ -67,6 +71,21 @@
     panGesture.delaysTouchesEnded = YES;
     
     [self.chatVC.view addGestureRecognizer:panGesture];
+}
+
+#pragma mark - Parse
+
+-(void)setupParse {
+
+    // Retrieve Group's Memebers
+    [CKNetworkHelper parseRetrieveGroupMembers:self.selectedGroup.groupID WithCompletion:^(NSError *error) {
+        [self.groupMemberVC.tblGroupMember reloadData];
+    }];
+    
+    // Retrieve Group's Messages
+    
+    // Retrieve Group's Polls
+    // Retrieve Group's Events
 }
 
 #pragma mark - Slide Gesture
@@ -93,17 +112,21 @@
         case UIGestureRecognizerStateChanged:
             // Open Menu Left
             if(self.chatVC.view.frame.origin.x+viewTranslation.x>=0 &&
-               self.chatVC.view.frame.origin.x+viewTranslation.x<= self.chatVC.view.frame.size.width*.8)
+               self.chatVC.view.frame.origin.x+viewTranslation.x<= self.chatVC.view.frame.size.width*.75)
             {
-                if (!self.isMembersVisible) { [self makeContactsVCVisible]; }
+                if (!self.isMembersVisible) {
+                    [self makeContactsVCVisible];
+                }
                 
                 self.chatVC.view.center = CGPointMake(self.chatVC.view.center.x+viewTranslation.x, self.chatVC.view.center.y);
                 [panGesture setTranslation:CGPointMake(0, 0) inView:self.view];
                 // Open Menu Right
             } else if (self.chatVC.view.frame.origin.x+viewTranslation.x<0 &&
-                       self.chatVC.view.frame.origin.x+viewTranslation.x>= -self.chatVC.view.frame.size.width*.8)
+                       self.chatVC.view.frame.origin.x+viewTranslation.x>= -self.chatVC.view.frame.size.width*.75)
             {
-                if (self.isMembersVisible) { [self makeAllEventsVCVisible]; }
+                if (self.isMembersVisible) {
+                    [self makeAllEventsVCVisible];
+                }
                 
                 self.chatVC.view.center = CGPointMake(self.chatVC.view.center.x+viewTranslation.x, self.chatVC.view.center.y);
                 [panGesture setTranslation:CGPointMake(0, 0) inView:self.view];
@@ -113,11 +136,11 @@
             
         case UIGestureRecognizerStateEnded:
             
-            if(self.chatVC.view.frame.origin.x > self.view.frame.size.width/4){
+            if(self.chatVC.view.frame.origin.x > self.view.frame.size.width*.25){
                 [self openLeftMenu];
-            } else if(self.chatVC.view.frame.origin.x < -self.view.frame.size.width/4){
+            } else if(self.chatVC.view.frame.origin.x < -self.view.frame.size.width*.25){
                 [self openRightMenu];
-            } else if (self.chatVC.view.frame.origin.x < self.view.frame.size.width/2){
+            } else if (self.chatVC.view.frame.origin.x < self.view.frame.size.width*.5){
                 [self closeMenu];
             }
             
@@ -133,7 +156,7 @@
                                               self.chatVC.view.frame.size.height);
     } completion:^(BOOL finished) {
         self.menuOpen = YES;
-     //   [self.delegate didMenuOpen:YES];
+        [self.delegate didMenuOpen:YES];
     }];
 }
 
@@ -145,7 +168,7 @@
                                               self.chatVC.view.frame.size.height);
     } completion:^(BOOL finished) {
         self.menuOpen = YES;
-     //   [self.delegate didMenuOpen:YES];
+        [self.delegate didMenuOpen:YES];
     }];
 }
 
@@ -155,7 +178,7 @@
         self.chatVC.view.frame = self.view.frame;
     } completion:^(BOOL finished) {
         self.menuOpen = NO;
-       // [self.delegate didMenuOpen:NO];
+        [self.delegate didMenuOpen:NO];
     }];
 }
 
@@ -165,8 +188,14 @@
     //    [self.view addSubview:self.contactsVC.view];
     //    [self.view addSubview:self.groupsVC.view];
     
-    [self.view bringSubviewToFront:self.groupMemberVC.view];
-    [self.view bringSubviewToFront:self.chatVC.view];
+//    [self.view bringSubviewToFront:self.groupMemberVC.view];
+//    [self.view bringSubviewToFront:self.chatVC.view];
+    
+    if(self.profileVC){
+        self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, 640, 0);
+    }
+    self.groupMemberVC.view.frame = CGRectOffset(self.groupMemberVC.view.frame, 640, 0);
+    self.groupEventsVC.view.frame = CGRectOffset(self.groupEventsVC.view.frame, 640, 0);
     
     self.membersVisible = YES;
 }
@@ -177,10 +206,46 @@
     //    [self.view addSubview:self.allEventsVC.view];
     //    [self.view addSubview:self.groupsVC.view];
     
-    [self.view bringSubviewToFront:self.groupEventsVC.view];
-    [self.view bringSubviewToFront:self.chatVC.view];
+//    [self.view bringSubviewToFront:self.groupEventsVC.view];
+//    [self.view bringSubviewToFront:self.chatVC.view];
+
+    if(self.profileVC){
+        self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, -640, 0);
+    }
+    self.groupMemberVC.view.frame = CGRectOffset(self.groupMemberVC.view.frame, -640, 0);
+    self.groupEventsVC.view.frame = CGRectOffset(self.groupEventsVC.view.frame, -640, 0);
     
     self.membersVisible = NO;
+}
+
+#pragma mark - Contact Delegate
+
+-(void)didSelectContact:(CKUser *)selectedContact{
+    [self addChildViewController:self.profileVC];
+    [self.profileVC didMoveToParentViewController:self];
+    [self.view addSubview:self.profileVC.view];
+    
+    [self.profileVC loadSelectedContact:selectedContact];
+    
+    [UIView animateWithDuration:.4 animations:^{
+        self.profileVC.view.frame = self.view.frame;
+        self.groupMemberVC.view.frame = CGRectOffset(self.groupMemberVC.view.frame, 240, 0);
+    } completion:^(BOOL finished) {
+        [self.view bringSubviewToFront:self.chatVC.view];
+    }];
+}
+
+#pragma mark - Profile Delegate
+
+-(void)didSelectProfileExit{
+    [UIView animateWithDuration:.4 animations:^{
+        self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, -240, 0);
+        self.groupMemberVC.view.frame = self.view.frame;
+    } completion:^(BOOL finished) {
+        [self.profileVC removeFromParentViewController];
+        [self.profileVC.view removeFromSuperview];
+        self.profileVC = nil;
+    }];
 }
 
 #pragma mark - Lazy
@@ -188,7 +253,7 @@
 -(CKGroupEventsVC *)groupEventsVC{
     if(!_groupEventsVC){
         _groupEventsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"groupEventsVC"];
-        _groupEventsVC.view.frame = self.view.frame;
+        _groupEventsVC.view.frame = CGRectOffset(self.view.frame, 640, 0);
     }
     return _groupEventsVC;
 }
@@ -197,17 +262,27 @@
     if(!_chatVC){
         _chatVC = [self.storyboard instantiateViewControllerWithIdentifier:@"chatVC"];
         _chatVC.view.frame = self.view.frame;
-       // [_groupsVC configureParentDelegate:self];
+       [_chatVC configureParentDelegate:self];
     }
     return _chatVC;
 }
 
--(CKGroupMemberTableVC *)groupMemberVC {
+-(CKGroupMemberVC *)groupMemberVC {
     if(!_groupMemberVC){
         _groupMemberVC = [self.storyboard instantiateViewControllerWithIdentifier:@"groupMemberVC"];
         _groupMemberVC.view.frame = self.view.frame;
+        [_chatVC configureParentDelegate:self];
     }
     return _groupMemberVC;
+}
+
+-(CKProfileVC *)profileVC {
+    if(!_profileVC){
+        _profileVC = [self.storyboard instantiateViewControllerWithIdentifier:@"profileVC"];
+        _profileVC.view.frame = CGRectOffset(self.groupMemberVC.view.frame, -240, 0);
+        _profileVC.delegate = self;
+    }
+    return _profileVC;
 }
 
 #pragma mark - Memory

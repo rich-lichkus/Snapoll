@@ -7,11 +7,13 @@
 //
 
 #import "CKGroupMemberVC.h"
+#import "CKContactsCell.h"
+#import "CKGroupRootVC.h"
 
 @interface CKGroupMemberVC() <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) CKUser *currentUser;
-@property (weak, nonatomic) IBOutlet UITableView *tblGroupMember;
+@property (strong, nonatomic) NSMutableArray *memberSearchResults;
 
 @end
 
@@ -21,10 +23,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    // [self parseUpdateGroupMembers];
-    
-    //[self.tableView reloadData];
 }
 
 - (void)viewDidLoad
@@ -52,75 +50,121 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(self.selectedGroup.pendingMembers >0){
-        return 2;
+    NSInteger numSections = 0;
+    
+    if (self.memberSearchResults){
+        numSections = 1;
     } else {
-        return 1;
+        numSections = 3; // Incoming, Contacts, Outgoing
     }
     
+    return numSections;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    NSString *title;
-    switch (section) {
-        case 0:
-            title = @"Members";
-            break;
-        case 1:
-            title = @"Invites";
-            break;
-    }
-    return title;
-}
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    NSString *title;
+//    switch (section) {
+//        case 0:
+//            title = @"Members";
+//            break;
+//        case 1:
+//            title = @"Invites";
+//            break;
+//    }
+//    return title;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger *numRows =0;
-    switch (section) {
-        case 0:
-        {
-            numRows = self.selectedGroup.members.count;
+    NSInteger numRows = 0;
+    if (self.memberSearchResults){
+        numRows = self.memberSearchResults.count;
+    } else {
+        switch (section) {
+            case 0:
+                numRows = self.parentVC.selectedGroup.incomingGroupRequests.count;
+                break;
+            case 1:
+                numRows = self.parentVC.selectedGroup.members.count;
+                break;
+            case 2:
+                numRows = self.parentVC.selectedGroup.outgoingGroupRequests.count;
+                break;
         }
-            break;
-            
-        case 1:
-        {
-            numRows = self.selectedGroup.pendingMembers.count;
-        }
-            break;
     }
     return numRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"memberCell" forIndexPath:indexPath];
-    switch (indexPath.section) {
+    CKContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"contactsCell" forIndexPath:indexPath];
+    
+    CKUser *currentMember;
+    
+    if (self.memberSearchResults) {
+        currentMember  = self.memberSearchResults[indexPath.row];
+    } else {
+        switch (indexPath.section) {
+            case 0: {
+                currentMember  = self.parentVC.selectedGroup.incomingGroupRequests[indexPath.row];
+            }
+                break;
+            case 1: {
+                currentMember  = self.parentVC.selectedGroup.members[indexPath.row];
+            }
+                break;
+            case 2: {
+                currentMember = self.parentVC.selectedGroup.outgoingGroupRequests[indexPath.row];
+            }
+                break;
+        }
+    }
+    
+    [self configureTableCell:cell WithContact:currentMember];
+    
+    return cell;
+}
+
+-(void)configureTableCell:(CKContactsCell*)cell WithContact:(CKUser*)ckUser{
+    
+    switch (ckUser.userStatus) {
+        case kUserStatusIncomingContactRequest: {
             
-        case 0:
-        {
-            CKUser *currentMember = self.selectedGroup.members[indexPath.row];
-            cell.imageView.layer.shouldRasterize = YES;
-            cell.imageView.image = [UIImage imageNamed:@"placeholder"];
-            cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height/2;
-            cell.imageView.layer.masksToBounds = YES;
-            cell.textLabel.text = [[[currentMember firstName] stringByAppendingString: @" "] stringByAppendingString: currentMember.lastName];
-            cell.detailTextLabel.text = [@"$" stringByAppendingString: [currentMember userName]];
+            [cell.imgBadge setHidden:NO];
+            cell.imgBadge.image = [UIImage imageNamed:@"download"];
+            cell.imgBadge.layer.cornerRadius = cell.imgBadge.frame.size.height/2;
+            cell.imgBadge.layer.masksToBounds = YES;
+            cell.lblDisplayName.textColor = [UIColor lightTextColor];
         }
             break;
-        case 1:
-        {
-            PFUser *currentMember = self.selectedGroup.pendingMembers[indexPath.row];
-            cell.imageView.layer.shouldRasterize = YES;
-            cell.imageView.image = [UIImage imageNamed:@"placeholder"];
-            cell.imageView.layer.cornerRadius = cell.imageView.frame.size.height/2;
-            cell.imageView.layer.masksToBounds = YES;
-            cell.textLabel.text = [[currentMember[@"firstName"] stringByAppendingString: @" "] stringByAppendingString: currentMember[@"lastName"]];
-            cell.detailTextLabel.text = [@"$" stringByAppendingString:currentMember[@"username"]];
+        case kUserStatusContact: {
+            [cell.imgBadge setHidden:YES];
+            cell.lblDisplayName.textColor = [UIColor whiteColor];
+        }
+            break;
+        case kUserStatusOutgoingContactRequest: {
+            
+            cell.imgBadge.image = [UIImage imageNamed:@"upload"];
+            [cell.imgBadge setHidden:NO];
+            cell.imgBadge.layer.cornerRadius = cell.imgBadge.frame.size.height/2;
+            cell.imgBadge.layer.masksToBounds = YES;
+            cell.lblDisplayName.textColor = [UIColor lightTextColor];
+        }
+            break;
+        case kUserStatusNotContact: {
+            cell.imgBadge.image = [UIImage imageNamed:@"plus"];
+            [cell.imgBadge setHidden:NO];
+            cell.imgBadge.layer.cornerRadius = cell.imgBadge.frame.size.height/2;
+            cell.imgBadge.layer.masksToBounds = YES;
+            cell.lblDisplayName.textColor = [UIColor whiteColor];
         }
             break;
     }
-    return cell;
+    
+    cell.imgAvatar.image = [UIImage imageNamed:@"placeholder"];
+    cell.imgAvatar.layer.cornerRadius = cell.imgAvatar.frame.size.height/2;
+    cell.imgAvatar.layer.masksToBounds = YES;
+    cell.lblDisplayName.text = [[[ckUser firstName] stringByAppendingString: @" "] stringByAppendingString: ckUser.lastName];
 }
 
 /*
@@ -168,7 +212,7 @@
 {
     if([segue.identifier isEqualToString:@"toNewMemberVC"]){
         CKNewMemberVC *newMemberVC = [segue destinationViewController];
-        newMemberVC.selectedGroup = self.selectedGroup;
+//        newMemberVC.selectedGroup = self.selectedGroup;
     }
     // Pass the selected object to the new view controller.
 }
@@ -180,34 +224,34 @@
 #pragma mark - Parse
 
 -(void)parseUpdateGroupMembers{
-    [CKNetworkHelper parseRetrieveGroupMembers:self.selectedGroup.groupID WithCompletion:^(NSError *error) {
-        self.currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
-        [CKArchiverHelper saveUserDataToArchive];
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self.tblGroupMember reloadData];
-        }];
-    }];
-    
-    PFQuery *invitations = [PFQuery queryWithClassName:@"GroupInvitations"];
-    [invitations whereKey:@"groupID" equalTo:self.selectedGroup.groupID];
-    [invitations findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        for(PFObject *invitation in objects){
-            
-            PFQuery *user = [PFQuery queryWithClassName:@"_User"];
-            [user whereKey:@"objectId" equalTo:invitation[@"toID"]];
-            [user findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                
-                CKUser *currentInvite = [self.selectedGroup getPendingMemberWithId:[objects[0] objectId]];
-                if(!currentInvite){
-                    [self.selectedGroup.pendingMembers addObject:objects[0]];
-                }
-                currentInvite = nil;
-            }];
-        }
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self.tblGroupMember reloadData];
-        }];
-    }];
+//    [CKNetworkHelper parseRetrieveGroupMembers:self.selectedGroup.groupID WithCompletion:^(NSError *error) {
+//        self.currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
+//        [CKArchiverHelper saveUserDataToArchive];
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            [self.tblGroupMember reloadData];
+//        }];
+//    }];
+//    
+//    PFQuery *invitations = [PFQuery queryWithClassName:@"GroupInvitations"];
+//    [invitations whereKey:@"groupID" equalTo:self.selectedGroup.groupID];
+//    [invitations findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        for(PFObject *invitation in objects){
+//            
+//            PFQuery *user = [PFQuery queryWithClassName:@"_User"];
+//            [user whereKey:@"objectId" equalTo:invitation[@"toID"]];
+//            [user findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//                
+//                CKUser *currentInvite = [self.selectedGroup getPendingMemberWithId:[objects[0] objectId]];
+//                if(!currentInvite){
+//                    [self.selectedGroup.pendingMembers addObject:objects[0]];
+//                }
+//                currentInvite = nil;
+//            }];
+//        }
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            [self.tblGroupMember reloadData];
+//        }];
+//    }];
 }
 
 #pragma mark - Memory

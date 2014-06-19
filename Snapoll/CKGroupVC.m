@@ -7,8 +7,8 @@
 //
 
 #import "CKGroupVC.h"
-#import "CKGroupMemberTableVC.h"
 #import "CKHotBoxRootVC.h"
+#import "CKChatVC.h"
 
 @interface CKGroupVC () <CKHotBoxRootVCDelegate>
 
@@ -56,7 +56,7 @@
     [super viewDidAppear:animated];
 }
 
-#pragma mark - Delegate
+#pragma mark - Configure Delegate
 
 -(void)configureParentDelegate:(CKHotBoxRootVC *)parentVC{
     self.parentVC = parentVC;
@@ -95,7 +95,7 @@
         
         [CKNetworkHelper deleteGroupWithId:groupID withCompletion:^{
             [self.currentUser.groups removeObjectAtIndex:indexPath.row];
-            [CKArchiverHelper saveUserDataToArchive];
+            //[CKArchiverHelper saveUserDataToArchive];
             [self.tblGroup deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }];
     }
@@ -123,13 +123,10 @@
     // CKMember Tab VC Properties
 //    CKGroupMemberTableVC *memberViewController = [[[segue destinationViewController] viewControllers] objectAtIndex:1];
 //    memberViewController.selectedGroup = self.currentUser.groups[selectedPath.row];
-}
-
-#pragma mark - Memory
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
+    
+    CKGroupRootVC *groupRootVC = [segue destinationViewController];
+    groupRootVC.selectedGroup = self.currentUser.groups[selectedPath.row];
+    NSLog(@"Prepare for segue");
 }
 
 #pragma mark - Parse 
@@ -152,4 +149,10 @@
     //self.tblGroup.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 }
 
+#pragma mark - Memory
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
 @end

@@ -13,11 +13,13 @@
 
 @interface CKGroup : NSObject <NSCoding>
 
-@property (strong, nonatomic) NSString *groupID;                // objectID
-@property (strong, nonatomic) NSString *groupName;              // name
-@property (strong, nonatomic) NSMutableArray *members;          // members
-@property (strong, nonatomic) NSMutableArray *pendingMembers;   // pendingMembers
-@property (strong, nonatomic) NSMutableArray *messages;         // messages
+@property (strong, nonatomic) NSString *groupID;                 // objectID
+@property (strong, nonatomic) NSString *groupName;               // name
+
+@property (strong, nonatomic) NSMutableArray *members;                  // members
+@property (strong, nonatomic) NSMutableArray *incomingGroupRequests;    // incomingGroupRequests
+@property (strong, nonatomic) NSMutableArray *outgoingGroupRequests;    // outgoingGroupRequests
+@property (strong, nonatomic) NSMutableArray *messages;                 // messages
 
 @property (strong, nonatomic) NSDate *createdAt;                // createdAt
 @property (strong, nonatomic) NSDate *updatedAt;                // updatedAt

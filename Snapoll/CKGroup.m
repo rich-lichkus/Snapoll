@@ -26,7 +26,8 @@
         self.groupID = [aDecoder decodeObjectForKey:@"groupID"];
         self.groupName = [aDecoder decodeObjectForKey:@"groupName"];
         self.members  = [aDecoder decodeObjectForKey:@"members"];
-        self.pendingMembers  = [aDecoder decodeObjectForKey:@"pendingMembers"];
+        self.incomingGroupRequests  = [aDecoder decodeObjectForKey:@"incomingGroupRequests"];
+        self.outgoingGroupRequests  = [aDecoder decodeObjectForKey:@"outgoingGroupRequests"];
         self.messages = [aDecoder decodeObjectForKey:@"messages"];
         
         self.createdAt = [aDecoder decodeObjectForKey:@"createdAt"];
@@ -43,7 +44,8 @@
     [aCoder encodeObject:self.groupID forKey:@"groupID"];
     [aCoder encodeObject:self.groupName forKey:@"groupName"];
     [aCoder encodeObject:self.members forKey:@"members"];
-    [aCoder encodeObject:self.pendingMembers forKey:@"pendingMembers"];
+    [aCoder encodeObject:self.incomingGroupRequests forKey:@"incomingGroupRequests"];
+    [aCoder encodeObject:self.outgoingGroupRequests forKey:@"outgoingGroupRequests"];
     [aCoder encodeObject:self.messages forKey:@"messages"];
 
     [aCoder encodeObject:self.createdAt forKey:@"createdAt"];
@@ -60,11 +62,18 @@
     return _members;
 }
 
--(NSMutableArray *)pendingMembers{
-    if(!_pendingMembers){
-        _pendingMembers = [[NSMutableArray alloc] init];
+-(NSMutableArray *)incomingGroupRequests{
+    if(!_incomingGroupRequests){
+        _incomingGroupRequests = [[NSMutableArray alloc] init];
     }
-    return _pendingMembers;
+    return _incomingGroupRequests;
+}
+
+-(NSMutableArray *)outgoingGroupRequests{
+    if(!_outgoingGroupRequests){
+        _outgoingGroupRequests = [[NSMutableArray alloc] init];
+    }
+    return _outgoingGroupRequests;
 }
 
 -(NSMutableArray*)messages{
@@ -85,13 +94,13 @@
     return nil;
 }
 
--(PFUser*)getPendingMemberWithId:(NSString*)userID{
-    for(PFUser *user in self.pendingMembers){
-        if([user.objectId isEqualToString:userID]){
-            return user;
-        }
-    }
-    return nil;
-}
+//-(PFUser*)getPendingMemberWithId:(NSString*)userID{
+//    for(PFUser *user in self.pendingMembers){
+//        if([user.objectId isEqualToString:userID]){
+//            return user;
+//        }
+//    }
+//    return nil;
+//}
 
 @end

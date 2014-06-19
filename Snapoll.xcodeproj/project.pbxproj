@@ -58,7 +58,6 @@
 		0FD01F1F194812A900ED20B3 /* CKGroupEventsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD01F1E194812A900ED20B3 /* CKGroupEventsVC.m */; };
 		0FD01F231948DE2300ED20B3 /* CKContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD01F221948DE2300ED20B3 /* CKContactsVC.m */; };
 		0FD01F261948ECD300ED20B3 /* CKChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD01F251948ECD300ED20B3 /* CKChatVC.m */; };
-		0FE292941907205F00FBFC23 /* CKGroupMemberTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE292931907205F00FBFC23 /* CKGroupMemberTableVC.m */; };
 		0FE2929A190727DF00FBFC23 /* CKNewGroupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */; };
 		0FE2929E19076CA100FBFC23 /* CKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE2929D19076CA100FBFC23 /* CKLoginVC.m */; };
 		0FE5281C190EBEDC0011FB9A /* CKArchiverHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5281B190EBEDC0011FB9A /* CKArchiverHelper.m */; };
@@ -153,8 +152,6 @@
 		0FD01F221948DE2300ED20B3 /* CKContactsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKContactsVC.m; sourceTree = "<group>"; };
 		0FD01F241948ECBF00ED20B3 /* CKChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKChatVC.h; sourceTree = "<group>"; };
 		0FD01F251948ECD300ED20B3 /* CKChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKChatVC.m; sourceTree = "<group>"; };
-		0FE292921907205F00FBFC23 /* CKGroupMemberTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupMemberTableVC.h; sourceTree = "<group>"; };
-		0FE292931907205F00FBFC23 /* CKGroupMemberTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupMemberTableVC.m; sourceTree = "<group>"; };
 		0FE29298190727DF00FBFC23 /* CKNewGroupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKNewGroupVC.h; sourceTree = "<group>"; };
 		0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKNewGroupVC.m; sourceTree = "<group>"; };
 		0FE2929C19076CA100FBFC23 /* CKLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKLoginVC.h; sourceTree = "<group>"; };
@@ -291,6 +288,7 @@
 				0F8FC0E41912C89600D27B80 /* Networking */,
 				0F44173B1905F7320090E88C /* Media */,
 				0F44173A1905F6C60090E88C /* Organizational */,
+				0F17EA121947B9B600EBE443 /* Obsolete */,
 				0F37B66E1905CEC30006444C /* Supporting Files */,
 			);
 			path = Snapoll;
@@ -334,7 +332,6 @@
 				0F70DA791918458F00DD6996 /* Profile */,
 				0F70DA7319182A1B00DD6996 /* Hot Box Root */,
 				0F17EA0D1947B86500EBE443 /* Group Root */,
-				0F17EA121947B9B600EBE443 /* Obsolete */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -440,8 +437,6 @@
 			children = (
 				0F2212CD1948F30900A1374D /* CKGroupMemberVC.h */,
 				0F2212CE1948F30900A1374D /* CKGroupMemberVC.m */,
-				0FE292921907205F00FBFC23 /* CKGroupMemberTableVC.h */,
-				0FE292931907205F00FBFC23 /* CKGroupMemberTableVC.m */,
 				0F70DA6C19181A8C00DD6996 /* CKNewMemberVC.h */,
 				0F70DA6D19181A8C00DD6996 /* CKNewMemberVC.m */,
 				0F4F0E5A191D99DA008B4480 /* Add Contacts */,
@@ -624,7 +619,6 @@
 				0F2212CF1948F30900A1374D /* CKGroupMemberVC.m in Sources */,
 				0F37B67B1905CEC30006444C /* Snapoll.xcdatamodeld in Sources */,
 				0F37B6A21905DB150006444C /* CKGroupVC.m in Sources */,
-				0FE292941907205F00FBFC23 /* CKGroupMemberTableVC.m in Sources */,
 				0F8FC0E31912C88900D27B80 /* CKNetworkHelper.m in Sources */,
 				0F4417361905F4770090E88C /* CKQuestion.m in Sources */,
 				0F17EA0C1947AEE000EBE443 /* CKHotBoxRootVC.m in Sources */,

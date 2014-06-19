@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "CKGroup.h"
+#import "CKConstants.h"
 @class CKGroup;
 
 @interface CKUser : NSObject <NSCoding>
@@ -21,6 +22,7 @@
 @property (nonatomic)         BOOL     emailVerified;   // emailVerified
 @property (strong, nonatomic) NSString *twitterHandle;  // authData (somehow)
 @property (strong, nonatomic) NSString *facebookHandle; // authData
+@property (nonatomic) kUserStatus userStatus;
 
 @property (strong, nonatomic) NSDate *createdAt;        // createdAt
 @property (strong, nonatomic) NSDate *updatedAt;        // updatedAt
@@ -37,6 +39,17 @@
 @property (strong, nonatomic) NSMutableArray *allPolls;  // allPolls
 
 +(CKUser*)sharedCurrentUser;
+
+-(instancetype)initPrimitivesWithPFUser:(PFUser*)userObject;
+
+- (kUserStatus) getContactStatusForUserId:(NSString*)userId;
+
+
+
+
+
+
+
 
 // Update the user's information
 -(void)updateCurrentUserWithPFUser:(PFUser*)userObject;
