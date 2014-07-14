@@ -25,7 +25,6 @@
     
     if(self){
         
-        NSLog(@"This is a log");
     }
 
     return self;

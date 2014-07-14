@@ -10,18 +10,32 @@
 #import "CKHotBoxRootVC.h"
 #import "CKUser.h"
 #import "CKAppDelegate.h"
+#import "CKSimpleText.h"
+#import "CKNetworkHelper.h"
+#import "CKInSimpleMessageCell.h"
+#import "CKOutSimpleMessageCell.h"
+#import "PaintCodeImages.h"
 
 @interface CKChatVC () <CKGroupRootVCDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) CKAppDelegate *appDelegate;
 @property (weak, nonatomic) CKUser *currentUser;
+@property (weak, nonatomic) CKGroup *currentUsersGroup;
 @property (weak, nonatomic) CKGroupRootVC *parentVC;
+@property (strong, nonatomic) NSString *groupMessageName;
 
-@property (weak, nonatomic) IBOutlet UITableView *tblMessages;
+@property (weak, nonatomic) IBOutlet UIButton *btnAddMedia;
 @property (strong, nonatomic) IBOutlet UIView *vwMessageButtons;
 @property (strong, nonatomic) IBOutlet UITextField *txtMessage;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
+@property (nonatomic) BOOL mediaOptionsPresented;
+@property (weak, nonatomic) IBOutlet UIView *uivMediaOptions;
+@property (weak, nonatomic) IBOutlet UIButton *btnCamera;
+@property (weak, nonatomic) IBOutlet UIButton *btnEvent;
+@property (weak, nonatomic) IBOutlet UIButton *btnPoll;
+
+- (IBAction)pressedMediaOption:(id)sender;
 - (IBAction)pressedAdd:(id)sender;
 - (IBAction)pressedSend:(id)sender;
 - (IBAction)pressedTextMessage:(id)sender;
@@ -47,12 +61,15 @@
     
     [self configureTableView];
     
+    [self configureSubviews];
+    
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     self.currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
     
     self.txtMessage.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
 }
 
 #pragma mark - Configure group root
@@ -61,6 +78,10 @@
     self.parentVC = parentVC;
     self.parentVC.delegate = self;
     self.navBar.topItem.title = self.parentVC.selectedGroup.groupName;
+    
+    self.groupMessageName = [@"messages_" stringByAppendingString: self.parentVC.selectedGroup.groupID];
+    self.currentUsersGroup = [self.currentUser getGroupWithId:self.parentVC.selectedGroup.groupID];
+
 }
 
 #pragma mark - Configure Table View
@@ -68,6 +89,16 @@
 -(void)configureTableView {
     self.tblMessages.delegate = self;
     self.tblMessages.dataSource = self;
+}
+
+#pragma mark - Configure Subviews
+-(void)configureSubviews{
+    
+    // Media Options
+    self.mediaOptionsPresented = NO;
+    self.uivMediaOptions.frame = CGRectOffset(self.uivMediaOptions.frame, 0, 80);
+    [self.btnAddMedia setImage:[PaintCodeImages imageOfAddIcon] forState:UIControlStateNormal];
+    [self.btnAddMedia setImage:[PaintCodeImages imageOfAddIcon] forState:UIControlStateSelected];
 }
 
 #pragma mark - Delegate Group Root
@@ -82,14 +113,45 @@
 #pragma mark - Datasource Table View
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.currentUsersGroup.messages.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell"];
-    cell.textLabel.text = @"Hello";
     
-    return cell;
+    CKSimpleText *currentMessage = self.currentUsersGroup.messages[indexPath.row];
+    
+    if([((PFUser*)currentMessage.creator).objectId isEqualToString:[[PFUser currentUser] objectId]]) {
+        CKOutSimpleMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"outgoingMessage"];
+        cell.txvMessage.text = currentMessage.textMessage;
+        cell.imgAvatar.image = [UIImage imageNamed:@"placeholder"];
+        cell.imgAvatar.layer.cornerRadius = cell.imgAvatar.frame.size.height*.5;
+        cell.imgAvatar.layer.masksToBounds = YES;
+        cell.txvMessage.layer.cornerRadius = 5;
+        cell.txvMessage.layer.masksToBounds = YES;
+//        cell.imgAvatarBadge.layer.cornerRadius = cell.imgAvatarBadge.frame.size.height*.5;
+//        cell.imgAvatarBadge.layer.masksToBounds = YES;
+        
+        return cell;
+    } else {
+        CKInSimpleMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"incomingMessage"];
+        cell.txvMessage.text = currentMessage.textMessage;
+        cell.imgAvatar.image = [UIImage imageNamed:@"placeholder"];
+        cell.imgAvatar.layer.cornerRadius = cell.imgAvatar.frame.size.height*.5;
+        cell.imgAvatar.layer.masksToBounds = YES;
+        cell.txvMessage.layer.cornerRadius = 5;
+        cell.txvMessage.layer.masksToBounds = YES;
+//        cell.imgAvatarBadge.layer.cornerRadius = cell.imgAvatarBadge.frame.size.height*.5;
+//        cell.imgAvatarBadge.layer.masksToBounds = YES;
+        return cell;
+    }
+    
+//    if(self.currentUsersGroup.messages.count-1 == indexPath.row){
+//        [self scrollTableAnimated:YES];
+//    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
 }
 
 #pragma mark - Navigation
@@ -105,11 +167,51 @@
 
 #pragma mark - Actions
 
+- (IBAction)pressedMediaOption:(id)sender {
+    
+    UIButton *btnMediaOption = (UIButton *)sender;
+    
+    switch (btnMediaOption.tag) {
+        case 0: { // Event
+            [self pressedAdd:nil];
+            [self.parentVC openRightMenu];
+            [self.parentVC makeAllEventsVCVisible];
+        }
+            break;
+        case 1: // Camera
+            
+            break;
+        case 2: // Poll
+            
+            break;
+    }
+    
+}
+
 - (IBAction)pressedAdd:(id)sender {
- 
+
+    [self.btnAddMedia setSelected: !self.btnAddMedia.isSelected];
+    [self presentMediaOptions:self.btnAddMedia.isSelected];
+    
 }
 
 - (IBAction)pressedSend:(id)sender {
+    
+    // Parse, post message to group messages
+    PFObject *newMessage = [PFObject objectWithClassName:self.groupMessageName];
+    newMessage[@"from_user"] = [PFUser currentUser];
+    newMessage[@"to_user"] = @"*"; // Indicates all users can read
+    newMessage[@"messageString"] = self.txtMessage.text;
+    [newMessage saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(succeeded){
+            self.txtMessage.text = @"";
+            [CKNetworkHelper parseRetrieveMessageForGroupId:self.parentVC.selectedGroup.groupID withCompletion:^(NSError *error) {
+                [self.tblMessages reloadData];
+                [self scrollTableAnimated:YES];
+                NSLog(@"%@", error.localizedDescription);
+            }];
+        }
+    }];
     
 }
 
@@ -117,10 +219,41 @@
     
 }
 
+#pragma mark - Animate SubViews
+
+-(void)presentMediaOptions:(BOOL)show{
+    
+    float dy = show ? -40 : 40;
+    
+    [UIView animateWithDuration:.3 animations:^{
+        self.tblMessages.frame = CGRectMake(self.tblMessages.frame.origin.x,
+                                            self.tblMessages.frame.origin.y,
+                                            self.tblMessages.frame.size.width,
+                                            self.tblMessages.frame.size.height+dy);
+        self.uivMediaOptions.frame = CGRectOffset(self.vwMessageButtons.frame, 0, dy);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+-(void)presentEventCreator:(BOOL)show{
+  
+}
+
 #pragma mark - Animate Keyboard/ Delegate
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
 
+    [UIView animateWithDuration:.3 animations:^{
+        self.tblMessages.frame = CGRectMake(self.tblMessages.frame.origin.x,
+                                            self.tblMessages.frame.origin.y,
+                                            self.tblMessages.frame.size.width,
+                                            self.tblMessages.frame.size.height-220);
+    } completion:^(BOOL finished) {
+        
+    }];
+
+    [self scrollTableAnimated:YES];
 }
 
 -(void)keyboardWillShow:(NSNotification*)notification
@@ -136,24 +269,31 @@
                      } completion:NULL];
 }
 
+#pragma mark - Scroll Messages
+
+-(void)scrollTableAnimated:(BOOL)animated{
+    if(self.parentVC.selectedGroup.messages.count>0){
+        [self.tblMessages scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: self.parentVC.selectedGroup.messages.count-1 inSection:0]
+                                atScrollPosition:UITableViewScrollPositionTop animated:animated];
+    }
+}
+
 #pragma mark - Scroll View Delegate
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    NSLog(@"%@", NSStringFromCGPoint(scrollView.contentOffset));
     
+//    [self.view endEditing:YES];
     
-    [self.view endEditing:YES];
-    
-    [UIView animateWithDuration: .25
-                          delay: 0.0f
-                        options: 7
-                     animations:^ {
-                         self.vwMessageButtons.frame = CGRectMake(self.vwMessageButtons.frame.origin.x,
-                                                                  self.view.frame.size.height-self.vwMessageButtons.frame.size.height-50,
-                                                                  self.vwMessageButtons.frame.size.width,
-                                                                  self.vwMessageButtons.frame.size.height);
-                     } completion:NULL];
+//    [UIView animateWithDuration: .25
+//                          delay: 0.0f
+//                        options: 7
+//                     animations:^ {
+//                         self.vwMessageButtons.frame = CGRectMake(self.vwMessageButtons.frame.origin.x,
+//                                                                  self.view.frame.size.height-self.vwMessageButtons.frame.size.height-50,
+//                                                                  self.vwMessageButtons.frame.size.width,
+//                                                                  self.vwMessageButtons.frame.size.height);
+//                     } completion:NULL];
 }
 
 #pragma mark - Memory

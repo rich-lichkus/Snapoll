@@ -10,6 +10,8 @@
 #import "CKNetworkHelper.h"
 #import "CKArchiverHelper.h"
 
+#import "CKSimpleText.h"
+
 @implementation CKNetworkHelper
 
 //--------------------------------------------------------------------------------------------------------------
@@ -141,7 +143,7 @@
 // Group Level
 //--------------------------------------------------------------------------------------------------------------
 
-// Retrieve Members, Outgoing Requests, Incoming Requests
+// Retrieve Members, Outgoing Requests
 //--------------------------------------------------------------------
 
 +(void)parseRetrieveGroupMembers:(NSString*)groupID WithCompletion:(void(^)(NSError *error))completion {
@@ -171,7 +173,7 @@
         
         // Retreive Group Outgoing Requests
         PFQuery *memberInvitationQuery = [PFQuery queryWithClassName:@"GroupInvitations"];
-        [memberInvitationQuery whereKey:@"from_user" equalTo:[PFUser currentUser]];
+        [memberInvitationQuery whereKey:@"group" equalTo:groupObject];
         [memberInvitationQuery includeKey:@"to_user"];
         [memberInvitationQuery includeKey:@"group"];
         [memberInvitationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -188,49 +190,60 @@
                 }
                 completion(error);
          }];
-    
-//        // Retreive Group Incoming Requests
-//        PFQuery *memberInvitationQuery = [PFQuery queryWithClassName:@"GroupInvitations"];
-//        [memberInvitationQuery whereKey:@"to_user" equalTo:[PFUser currentUser]];
-//        [memberInvitationQuery includeKey:@"from_user"];
-//        [memberInvitationQuery includeKey:@"group"];
-//        [memberInvitationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//
-//            [ckGroup.incomingGroupRequests removeAllObjects];
-//
-//                for(PFObject *invitation in objects){
-//                    
-//                    PFUser *contact = invitation[@"from_user"];
-//
-//                    CKUser *newMember = [[CKUser alloc]initPrimitivesWithPFUser:contact];
-//                    newMember.userStatus = kUserStatusIncomingContactRequest;
-//                        
-//                    [ckGroup.incomingGroupRequests addObject:newMember];
-//                }
-//                completion(error);
-//         }];
         
-//        //add in pointer invitation to and from member
-//        PFQuery *userq = [PFUser query];
-//        [userq getObjectInBackgroundWithId:@"FsrM2q4mvH" block:^(PFObject *object, NSError *error) {
-//            PFObject *newInvitation = [PFObject objectWithClassName:@"GroupInvitations"];
-//            newInvitation[@"from_user"] = [PFUser currentUser];
-//            newInvitation[@"to_user"] = object;
-//            newInvitation[@"group"] = groupObject;
-//            [newInvitation saveInBackground];
+//        PFQuery *richUser = [PFQuery queryWithClassName:@"_User"];
+//        [richUser getObjectInBackgroundWithId:@"GieQgscgZm" block:^(PFObject *richObject, NSError *error) {
+//            
+//            //add in pointer invitation to and from member
+//            PFQuery *userq = [PFUser query];
+//            [userq getObjectInBackgroundWithId:@"FsrM2q4mvH" block:^(PFObject *object, NSError *error) {
+//                PFObject *newInvitation = [PFObject objectWithClassName:@"GroupInvitations"];
+//                newInvitation[@"from_user"] = richObject;
+//                newInvitation[@"to_user"] = object;
+//                newInvitation[@"group"] = groupObject;
+//                [newInvitation saveInBackground];
+//            }];
+//            
 //        }];
-//        
+        
     }];
-    
-
- 
-    
-    
     
 }
 
+// Retrieve Simple Messages
+//--------------------------------------------------------------------
++(void) parseRetrieveMessageForGroupId:(NSString*)groupId withCompletion:(void(^)(NSError *error))completion {
 
-
+    CKUser *currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication]delegate]).currentUser;
+    
+    CKGroup *currentGroup = [currentUser getGroupWithId:groupId];
+    
+    PFQuery *query = [PFQuery queryWithClassName:[@"messages_" stringByAppendingString:groupId]];
+    [query orderByAscending:@"createdAt"];
+    [query includeKey:@"from_user"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        [currentGroup.messages removeAllObjects];
+        
+        for (PFObject *message in objects){
+            
+            CKSimpleText *ckSimple = [[CKSimpleText alloc] init];
+         
+            ckSimple.messageID = message.objectId;
+            ckSimple.creator = message[@"from_user"];
+            ckSimple.dateCreated = message.createdAt;
+            ckSimple.dateUpdated = message.updatedAt;
+            
+            ckSimple.textMessage = message[@"messageString"];
+                        
+            [currentGroup.messages addObject: ckSimple];
+        }
+        
+        completion(error);
+        
+    }];
+    
+}
 
 
 

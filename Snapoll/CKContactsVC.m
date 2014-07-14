@@ -8,15 +8,23 @@
 
 #import "CKContactsVC.h"
 #import "CKContactsCell.h"
+#import "CKPlusButton.h"
+#import "PaintCodeImages.h"
 
 @interface CKContactsVC () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) CKUser *currentUser;
+@property (nonatomic, getter = isInEditMode) BOOL inEditMode;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segSearchLocation;
 @property (weak, nonatomic) IBOutlet UISearchBar *srbSearch;
+@property (weak, nonatomic) IBOutlet UIView *uivDrawer;
+@property (weak, nonatomic) IBOutlet UIButton *btnEdit;
+@property (weak, nonatomic) IBOutlet CKPlusButton *btnPlus;
 
+@property (strong, nonatomic) NSMutableArray *selectedContacts;
 @property (strong, nonatomic) NSMutableArray *contactSearchResults;
+- (IBAction)pressedEditMode:(id)sender;
 
 @end
 
@@ -39,6 +47,8 @@
     
     [self configureSearchBar];
     
+    [self configureDrawerView];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -51,6 +61,8 @@
 -(void)configureTables {
     self.tblContacts.delegate = self;
     self.tblContacts.dataSource = self;
+    self.inEditMode = NO;
+
 }
 
 -(void)configureSearchBar{
@@ -62,12 +74,37 @@
             break;
         }
     }
+    
+    self.segSearchLocation.alpha = 0;
 }
+
+#pragma mark - Configure Drawer View
+
+-(void)configureDrawerView{
+    self.uivDrawer.frame = CGRectOffset(self.uivDrawer.frame, 0, 50);
+    self.btnEdit.frame = CGRectOffset(self.btnEdit.frame, 0, 50);
+   }
 
 #pragma mark - Search Bar
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
     self.srbSearch.showsCancelButton = YES;
+    if(self.segSearchLocation.frame.origin.y < 44) {
+        self.tblContacts.frame = CGRectMake(self.tblContacts.frame.origin.x,
+                                            self.tblContacts.frame.origin.y,
+                                            self.tblContacts.frame.size.width,
+                                            self.tblContacts.frame.size.height-50);
+        
+        [UIView animateWithDuration:.3 animations:^{
+           
+            self.tblContacts.frame = CGRectOffset(self.tblContacts.frame, 0, 44);
+            self.segSearchLocation.alpha = 1.0;
+            self.segSearchLocation.frame = CGRectOffset(self.segSearchLocation.frame, 0, 39);
+        
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -102,6 +139,23 @@
     [self.srbSearch resignFirstResponder];
     [self.tblContacts reloadData];
     self.srbSearch.showsCancelButton = NO;
+    
+    // Animate Back to non-search mode
+    self.tblContacts.frame = CGRectMake(self.tblContacts.frame.origin.x,
+                                        self.tblContacts.frame.origin.y,
+                                        self.tblContacts.frame.size.width,
+                                        self.tblContacts.frame.size.height+50);
+    
+    [UIView animateWithDuration:.3 animations:^{
+        
+        self.tblContacts.frame = CGRectOffset(self.tblContacts.frame, 0, -44);
+        self.segSearchLocation.alpha = 0.0;
+        self.segSearchLocation.frame = CGRectOffset(self.segSearchLocation.frame, 0, -39);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
 }
 
 -(BOOL)textFieldShouldClear:(UITextField *)textField{
@@ -112,6 +166,27 @@
 }
 
 #pragma mark - Table view data source
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+   
+    NSArray *sectionTitles;
+    
+    if(self.contactSearchResults){
+        sectionTitles = @[@"Search"];
+    } else {
+        sectionTitles = @[@"Requests",@"HotBoxers", @"Invites"];
+    }
+
+    NSString *title = [sectionTitles objectAtIndex:section];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+    [label setFont:[UIFont boldSystemFontOfSize:15]];
+    [label setText:title];
+    [view addSubview:label];
+    
+    return view;
+}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -209,7 +284,7 @@
             [cell.imgBadge setHidden:NO];
             cell.imgBadge.layer.cornerRadius = cell.imgBadge.frame.size.height/2;
             cell.imgBadge.layer.masksToBounds = YES;
-            cell.lblDisplayName.textColor = [UIColor whiteColor];
+            cell.lblDisplayName.textColor = [UIColor blackColor];
         }
             break;
     }
@@ -217,7 +292,16 @@
     cell.imgAvatar.image = [UIImage imageNamed:@"placeholder"];
     cell.imgAvatar.layer.cornerRadius = cell.imgAvatar.frame.size.height/2;
     cell.imgAvatar.layer.masksToBounds = YES;
-    cell.lblDisplayName.text = [[[ckUser firstName] stringByAppendingString: @" "] stringByAppendingString: ckUser.lastName];
+    cell.lblDisplayName.text = [[[ckUser firstName] stringByAppendingString: @" "]
+                                                    stringByAppendingString: ckUser.lastName];
+
+    if(self.isInEditMode && [self.selectedContacts containsObject:ckUser]){
+        cell.imgSelectionIndicator.image = [UIImage imageNamed:@"blue-circle-white-check"];
+    } else if (self.isInEditMode){
+        cell.imgSelectionIndicator.image = [UIImage imageNamed:@"blue-circle"];
+    } else {
+        cell.imgSelectionIndicator.image = nil;
+    }
 }
 
 
@@ -241,7 +325,18 @@
         }
     }
     
-    [self.delegate didSelectContact:selectedContact];
+    if(self.isInEditMode){
+        if([self.selectedContacts containsObject:selectedContact]){
+            //  Already Exists, Remove
+            [self.selectedContacts removeObject:selectedContact];
+        } else {
+            // Doesn't Exists, Add
+            [self.selectedContacts addObject:selectedContact];
+        }
+        [self.tblContacts reloadData];
+    } else {
+        [self.delegate didSelectContact:selectedContact];
+    }
 }
 
 /*
@@ -293,6 +388,40 @@
  }
  */
 
+#pragma mark - Lazy
+-(NSMutableArray *)selectedContacts{
+    if(!_selectedContacts){
+        _selectedContacts = [[NSMutableArray alloc]init];
+    }
+    return _selectedContacts;
+}
+
+#pragma mark - Actions
+- (IBAction)pressedEditMode:(id)sender {
+    
+    if(self.isInEditMode){
+        self.inEditMode = NO;
+        
+        [UIView animateWithDuration:.2 animations:^{
+            self.uivDrawer.frame = CGRectOffset(self.uivDrawer.frame, 0, 50);
+            self.btnEdit.frame = CGRectOffset(self.btnEdit.frame, 0, 50);
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } else {
+        self.inEditMode = YES;
+        
+        [UIView animateWithDuration: .2 animations:^{
+            self.uivDrawer.frame = CGRectOffset(self.uivDrawer.frame, 0, -50);
+            self.btnEdit.frame = CGRectOffset(self.btnEdit.frame, 0, -50);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    [self.tblContacts reloadData];
+}
+
 #pragma mark - Network
 
 -(void)parseUpdateContacts{
@@ -315,5 +444,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

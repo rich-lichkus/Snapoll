@@ -9,6 +9,7 @@
 #import "CKGroupVC.h"
 #import "CKHotBoxRootVC.h"
 #import "CKChatVC.h"
+#import "PaintCodeImages.h"
 
 @interface CKGroupVC () <CKHotBoxRootVCDelegate>
 
@@ -16,8 +17,16 @@
 @property (strong, nonatomic) IBOutlet UITableView *tblGroup;
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) CKUser *currentUser;
-
 @property (nonatomic, getter = isMenuOpen) BOOL menuOpen;
+
+@property (weak, nonatomic) IBOutlet UIView *uivNewGroup;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segCreateOption;
+@property (weak, nonatomic) IBOutlet UITextField *txtGroupName;
+@property (strong, nonatomic) UIBarButtonItem *bbiAddGroup;
+@property (strong, nonatomic) UIBarButtonItem *bbiCurrentUser;
+
+- (IBAction)segValueChanged:(id)sender;
 
 @end
 
@@ -50,6 +59,8 @@
     self.currentUser = ((CKAppDelegate*)[[UIApplication sharedApplication] delegate]).currentUser;
     
     [self configureTable];
+    
+    [self configureSubviews];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -69,6 +80,20 @@
     [self.tblGroup setScrollEnabled:!self.menuOpen];
     self.tblGroup.allowsSelection = !self.menuOpen;
    
+}
+
+-(void)configureSubviews{
+    self.uivNewGroup.hidden = YES;
+    self.bbiAddGroup = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pressedAddGroup:)];
+    
+    self.bbiCurrentUser = [[UIBarButtonItem alloc]initWithImage:[PaintCodeImages imageOfBBPlaceholderAvatar]
+                                                          style:UIBarButtonItemStylePlain
+                                                         target:self
+                                                         action:@selector(pressedCurrentUserBarButton:)];
+    
+    self.txtGroupName.placeholder = @"New Group Name";
+    self.navBar.topItem.leftBarButtonItem = self.bbiCurrentUser;
+    self.navBar.topItem.rightBarButtonItem = self.bbiAddGroup;
 }
 
 #pragma mark - Data Source
@@ -103,6 +128,107 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 100;
+}
+
+#pragma mark - Actions
+
+- (IBAction)pressedAddGroup:(id)sender {
+    
+    self.tblGroup.frame = CGRectMake(self.tblGroup.frame.origin.x,
+                                     self.tblGroup.frame.origin.y,
+                                     self.tblGroup.frame.size.width,
+                                     self.tblGroup.frame.size.height-40);
+    
+    [UIView animateWithDuration:.3 animations:^{
+        self.tblGroup.frame = CGRectOffset(self.tblGroup.frame, 0, 40);
+        self.uivNewGroup.frame = CGRectOffset(self.uivNewGroup.frame, 0, 38);
+        self.uivNewGroup.hidden = NO;
+    } completion:^(BOOL finished) {
+
+    }];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                   style:UIBarButtonItemStyleDone
+                                                                  target:self
+                                                                  action:@selector(pressedCancel)];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                   style:UIBarButtonItemStyleDone
+                                                                  target:self
+                                                                  action:@selector(pressedDone)];
+    self.navBar.topItem.leftBarButtonItem = cancelButton;
+    self.navBar.topItem.rightBarButtonItem = doneButton;
+}
+
+-(void)pressedCurrentUserBarButton:(id)sender{
+    
+    //
+    //self.parentVC.
+    // Load detail contact page, with current user
+    // Open left menu
+
+}
+
+-(void)pressedCancel{
+    [self closeNewGroupView];
+    [self.txtGroupName resignFirstResponder];
+}
+
+-(void)pressedDone{
+    
+    if(self.txtGroupName.text.length >0) {
+        switch (self.segCreateOption.selectedSegmentIndex) {
+            case 0: { // Create New Group
+                [PFCloud callFunctionInBackground:@"createNewGroup"
+                                   withParameters:@{@"groupName": self.txtGroupName.text}
+                                            block:^(id object, NSError *error) {
+                                                //[self closeNewGroupView];
+                                            }];
+            }
+                break;
+                
+            case 1: { // Join Group
+                [PFCloud callFunctionInBackground:@"joinGroup"
+                                   withParameters:@{@"objectId" : self.txtGroupName.text }
+                                            block:^(id object, NSError *error) {
+                                                [self closeNewGroupView];
+                                            }];
+            }
+                break;
+        }
+    }
+}
+
+- (IBAction)segValueChanged:(id)sender {
+    
+    switch (self.segCreateOption.selectedSegmentIndex) {
+        case 0: // New
+            self.txtGroupName.placeholder = @"New Group Name";
+            break;
+            
+        case 1: // Join
+            self.txtGroupName.placeholder = @"Group ID";
+            break;
+    }
+}
+
+#pragma mark - Animated Views
+
+-(void) closeNewGroupView {
+    self.navBar.topItem.leftBarButtonItem = self.bbiCurrentUser;
+    self.navBar.topItem.rightBarButtonItem = self.bbiAddGroup;
+    
+    self.tblGroup.frame = CGRectMake(self.tblGroup.frame.origin.x,
+                                     self.tblGroup.frame.origin.y,
+                                     self.tblGroup.frame.size.width,
+                                     self.tblGroup.frame.size.height+40);
+    
+    [UIView animateWithDuration:.3 animations:^{
+        self.tblGroup.frame = CGRectOffset(self.tblGroup.frame, 0, -40);
+        self.uivNewGroup.frame = CGRectOffset(self.uivNewGroup.frame, 0, -38);
+    } completion:^(BOOL finished) {
+        self.uivNewGroup.hidden = YES;
+    }];
 }
 
 #pragma mark - Navigation
@@ -155,4 +281,6 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+
 @end

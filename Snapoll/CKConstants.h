@@ -23,6 +23,33 @@ typedef NS_ENUM (NSInteger, kMemberStatus){
     kUserStatusNotMember
 };
 
+
+typedef NS_ENUM (NSInteger, kLoginOption){
+    kFacebookLogin = 0,
+    kTwitterLogin,
+    kEmailLogin
+};
+
+
+typedef NS_ENUM (NSInteger, kMessageType){
+    kSimpleTextMessage = 0,
+    kEventMessage,
+    kCustomPollMessage
+};
+
+typedef NS_ENUM (NSInteger, kPollStatus){
+    kPollClosed = 0,
+    kPollOpen,
+    kPollFinalized
+};
+
+typedef NS_ENUM (NSInteger, kEventAttribute){
+    kEventWhat = 0,
+    kEventWhere,
+    kEventWhen,
+    kEventWho
+};
+
 @interface CKConstants : NSObject
 
 

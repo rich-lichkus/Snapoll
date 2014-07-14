@@ -20,4 +20,10 @@
 // Date Created
 @property (strong, nonatomic) NSDate *dateCreated;
 
+@property (strong, nonatomic) NSDate *dateUpdated;
+
+@property (strong, nonatomic) PFACL *acl;
+
+@property (nonatomic) kMessageType messageType;
+
 @end

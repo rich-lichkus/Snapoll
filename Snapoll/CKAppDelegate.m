@@ -8,6 +8,7 @@
 
 #import "CKAppDelegate.h"
 #import "CKGroupVC.h"
+//#import <FacebookSDK/FacebookSDK.h>
 
 @implementation CKAppDelegate
 
@@ -20,7 +21,14 @@
     [Parse setApplicationId:@"xtAUG3fDPyrBZEhm8yVwTFV1TapkCaZ2Lc0Bgnnl"
                   clientKey:@"VPTvs1d2g5E3HO0orwreEZUlw4Q0egTuqpcX9AfA"];
     
+//    [PFFacebookUtils initializeFacebook];
+    
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // Register for push notifications
+    [application registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge |
+                                                     UIRemoteNotificationTypeAlert |
+                                                     UIRemoteNotificationTypeSound];
     
     self.currentUser = [CKUser sharedCurrentUser];
     
@@ -47,6 +55,10 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    // Facebook Sign in
+//    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -68,6 +80,27 @@
         } 
     }
 }
+
+#pragma mark - Parse Push Notifications
+
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:newDeviceToken];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
+#pragma mark - Facebook Sign in
+
+//-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+//    
+////    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession: [PFFacebookUtils session]];
+//}
 
 #pragma mark - Core Data stack
 

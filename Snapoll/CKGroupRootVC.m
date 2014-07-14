@@ -11,12 +11,15 @@
 #import "CKGroupEventsVC.h"
 #import "CKProfileVC.h"
 #import "CKNetworkHelper.h"
+#import "CKPollVC.h"
 
-@interface CKGroupRootVC () <UIGestureRecognizerDelegate, CKProfileVCDelegate>
+@interface CKGroupRootVC () <UIGestureRecognizerDelegate, CKGroupEventsVCDelegate, CKPollVCDelegate>
 
 @property (strong, nonatomic) CKProfileVC *profileVC;
 @property (strong, nonatomic) CKGroupMemberVC *groupMemberVC;
 @property (strong, nonatomic) CKGroupEventsVC *groupEventsVC;
+@property (strong, nonatomic) CKPollVC *pollVC;
+@property (strong, nonatomic) NSString *groupMessageName;
 
 @property (nonatomic, getter = isMenuOpen) BOOL menuOpen;
 @property (nonatomic, getter = isMembersVisible) BOOL membersVisible;
@@ -83,6 +86,12 @@
     }];
     
     // Retrieve Group's Messages
+    self.groupMessageName = [@"message_" stringByAppendingString:self.selectedGroup.groupName];
+    [CKNetworkHelper parseRetrieveMessageForGroupId:self.selectedGroup.groupID withCompletion:^(NSError *error) {
+        [self.chatVC.tblMessages reloadData];
+        [self.chatVC scrollTableAnimated:NO];
+        NSLog(@"group root done.");
+    }];
     
     // Retrieve Group's Polls
     // Retrieve Group's Events
@@ -191,8 +200,8 @@
 //    [self.view bringSubviewToFront:self.groupMemberVC.view];
 //    [self.view bringSubviewToFront:self.chatVC.view];
     
-    if(self.profileVC){
-        self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, 640, 0);
+    if(self.pollVC){
+        self.pollVC.view.frame = CGRectOffset(self.pollVC.view.frame, -640, 0);
     }
     self.groupMemberVC.view.frame = CGRectOffset(self.groupMemberVC.view.frame, 640, 0);
     self.groupEventsVC.view.frame = CGRectOffset(self.groupEventsVC.view.frame, 640, 0);
@@ -209,8 +218,8 @@
 //    [self.view bringSubviewToFront:self.groupEventsVC.view];
 //    [self.view bringSubviewToFront:self.chatVC.view];
 
-    if(self.profileVC){
-        self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, -640, 0);
+    if(self.pollVC){
+        self.pollVC.view.frame = CGRectOffset(self.pollVC.view.frame, 640, 0);
     }
     self.groupMemberVC.view.frame = CGRectOffset(self.groupMemberVC.view.frame, -640, 0);
     self.groupEventsVC.view.frame = CGRectOffset(self.groupEventsVC.view.frame, -640, 0);
@@ -248,12 +257,44 @@
     }];
 }
 
+#pragma mark - GroupEvents Delegate
+
+-(void)didSelectPoll:(CKEvent *)selectedPoll{
+    
+    [self addChildViewController:self.pollVC];
+    [self.pollVC didMoveToParentViewController:self];
+    [self.view addSubview:self.pollVC.view];
+    
+    [self.pollVC loadSelectedPoll:selectedPoll];
+    
+    [UIView animateWithDuration:.4 animations:^{
+        self.pollVC.view.frame = self.view.frame;
+        self.groupEventsVC.view.frame = CGRectOffset(self.groupEventsVC.view.frame, -240, 0);
+    } completion:^(BOOL finished) {
+        [self.view bringSubviewToFront:self.chatVC.view];
+    }];
+}
+
+#pragma mark - Poll Delegate
+
+-(void)didSelectPollExit{
+    [UIView animateWithDuration:.4 animations:^{
+        self.pollVC.view.frame = CGRectOffset(self.pollVC.view.frame, 240, 0);
+        self.groupEventsVC.view.frame = self.view.frame;
+    } completion:^(BOOL finished) {
+        [self.pollVC removeFromParentViewController];
+        [self.pollVC.view removeFromSuperview];
+        self.pollVC = nil;
+    }];
+}
+
 #pragma mark - Lazy
 
 -(CKGroupEventsVC *)groupEventsVC{
     if(!_groupEventsVC){
         _groupEventsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"groupEventsVC"];
         _groupEventsVC.view.frame = CGRectOffset(self.view.frame, 640, 0);
+        _groupEventsVC.delegate = self;
     }
     return _groupEventsVC;
 }
@@ -283,6 +324,15 @@
         _profileVC.delegate = self;
     }
     return _profileVC;
+}
+
+-(CKPollVC *)pollVC {
+    if(!_pollVC){
+        _pollVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pollVC"];
+        _pollVC.view.frame = CGRectOffset(self.groupEventsVC.view.frame, 240, 0);
+        _pollVC.delegate = self;
+    }
+    return _pollVC;
 }
 
 #pragma mark - Memory

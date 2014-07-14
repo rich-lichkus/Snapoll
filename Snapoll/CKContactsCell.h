@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *lblDisplayName;
 @property (weak, nonatomic) IBOutlet UIImageView *imgBadge;
+@property (weak, nonatomic) IBOutlet UIImageView *imgSelectionIndicator;
 
 
 @end

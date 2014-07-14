@@ -55,7 +55,7 @@
     if (self.memberSearchResults){
         numSections = 1;
     } else {
-        numSections = 3; // Incoming, Contacts, Outgoing
+        numSections = 2; // Contacts, Outgoing
     }
     
     return numSections;
@@ -82,12 +82,9 @@
     } else {
         switch (section) {
             case 0:
-                numRows = self.parentVC.selectedGroup.incomingGroupRequests.count;
-                break;
-            case 1:
                 numRows = self.parentVC.selectedGroup.members.count;
                 break;
-            case 2:
+            case 1:
                 numRows = self.parentVC.selectedGroup.outgoingGroupRequests.count;
                 break;
         }
@@ -106,14 +103,10 @@
     } else {
         switch (indexPath.section) {
             case 0: {
-                currentMember  = self.parentVC.selectedGroup.incomingGroupRequests[indexPath.row];
-            }
-                break;
-            case 1: {
                 currentMember  = self.parentVC.selectedGroup.members[indexPath.row];
             }
                 break;
-            case 2: {
+            case 1: {
                 currentMember = self.parentVC.selectedGroup.outgoingGroupRequests[indexPath.row];
             }
                 break;
@@ -128,15 +121,6 @@
 -(void)configureTableCell:(CKContactsCell*)cell WithContact:(CKUser*)ckUser{
     
     switch (ckUser.userStatus) {
-        case kUserStatusIncomingContactRequest: {
-            
-            [cell.imgBadge setHidden:NO];
-            cell.imgBadge.image = [UIImage imageNamed:@"download"];
-            cell.imgBadge.layer.cornerRadius = cell.imgBadge.frame.size.height/2;
-            cell.imgBadge.layer.masksToBounds = YES;
-            cell.lblDisplayName.textColor = [UIColor lightTextColor];
-        }
-            break;
         case kUserStatusContact: {
             [cell.imgBadge setHidden:YES];
             cell.lblDisplayName.textColor = [UIColor whiteColor];

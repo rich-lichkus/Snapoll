@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CKEvent.h"
+
+@protocol CKAllEventsVCDelegate <NSObject>
+
+-(void)didSelectPoll:(CKEvent*)selectedPoll;
+
+@end
 
 @interface CKAllEventsVC : UIViewController
+
+@property (nonatomic, unsafe_unretained) id<CKAllEventsVCDelegate> delegate;
 
 @end

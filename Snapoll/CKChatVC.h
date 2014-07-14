@@ -14,6 +14,9 @@
 
 @interface CKChatVC : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *tblMessages;
+
 -(void) configureParentDelegate:(CKGroupRootVC*)parentVC;
+-(void)scrollTableAnimated:(BOOL)animated;
 
 @end

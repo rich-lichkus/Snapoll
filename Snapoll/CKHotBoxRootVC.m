@@ -12,12 +12,13 @@
 #import "CKGroupVC.h"
 #import "CKProfileVC.h"
 #import "CKNetworkHelper.h"
+#import "CKPollVC.h"
 
-@interface CKHotBoxRootVC () <UIGestureRecognizerDelegate, CKContactsVCDelegate, CKProfileVCDelegate>
+@interface CKHotBoxRootVC () <UIGestureRecognizerDelegate, CKContactsVCDelegate, CKProfileVCDelegate, CKAllEventsVCDelegate, CKPollVCDelegate>
 
 @property (strong, nonatomic) CKUser *currentUser;
 @property (strong, nonatomic) CKProfileVC *profileVC;
-
+@property (strong, nonatomic) CKPollVC *pollVC;
 @property (strong, nonatomic) CKAllEventsVC *allEventsVC;
 @property (strong, nonatomic) CKContactsVC *contactsVC;
 @property (strong, nonatomic) CKGroupVC *groupsVC;
@@ -92,6 +93,67 @@
     // Retrieve User's Events
     // Retrieve User's Polls
     
+    
+    
+//    // Cloud Code Example
+//    [PFCloud callFunctionInBackground:@"getGroup"
+//                       withParameters:@{@"objectId": @"1HWBsB55wl"}
+//                                block:^(NSString *name, NSError *error) {
+//        if (!error) {
+//            NSLog(@"%@", name);
+//        }
+//    }];
+//    
+//    [PFCloud callFunctionInBackground:@"hello" withParameters: @{} block:^(id object, NSError *error) {
+//        if(!error){
+//            NSLog(@"%@", object);
+//        }
+//    }];
+
+//    [PFCloud callFunctionInBackground:@"getUsersGroups"
+//                       withParameters:@{@"objectId": [[PFUser currentUser]objectId]}
+//                                block:^(id result, NSError *error) {
+//        if (!error) {
+//            NSLog(@"%@", result);
+//        }
+//    }];
+    
+//    [PFCloud callFunctionInBackground:@"getUsersHotBoxData"
+//                       withParameters:@{@"objectId": [PFUser currentUser].objectId}
+//                                block:^(id response, NSError *error) {
+//        if (!error) {
+//            NSLog(@"%@", response);
+//        }
+//    }];
+    
+//    PFUser *current = [PFUser currentUser];
+
+//    [PFCloud callFunctionInBackground:@"groupContactInvitation"
+//                       withParameters:@{ @"to_user" : @"Vv6Ouh0xtm",
+//                                         @"groupId" : @""}
+//                                block:^(id object, NSError *error) {
+//        NSLog(@"%@", object);
+//    }];
+    
+    
+//    [PFCloud callFunctionInBackground:@"sendGroupInvitation"
+//                        withParameters:@{@"to_user": @"jQwtqGqkKr",
+//                                         @"groupId": @"bn44oidqbJ" }
+//                                   block:^(id response, NSError *error) {
+//        if (!error) {
+//           NSLog(@"%@", response);
+//       }
+//    }];
+    
+//  [PFCloud callFunctionInBackground:@"getUsersGroups"
+//                     withParameters:@{@"objectId": [[PFUser currentUser]objectId]}
+//                              block:^(id response, NSError *error) {
+//    if (!error) {
+//       // NSLog(@"%@", user);
+//    }
+//  }];
+    
+
 }
 
 #pragma mark - Slide Gesture
@@ -197,6 +259,9 @@
     if(self.profileVC){
         self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, 640, 0);
     }
+    if(self.pollVC){
+        self.pollVC.view.frame = CGRectOffset(self.pollVC.view.frame, 640, 0);
+    }
     self.contactsVC.view.frame = CGRectOffset(self.contactsVC.view.frame, 640, 0);
     self.allEventsVC.view.frame = CGRectOffset(self.allEventsVC.view.frame, 640, 0);
     
@@ -211,6 +276,9 @@
     
     if(self.profileVC){
         self.profileVC.view.frame = CGRectOffset(self.profileVC.view.frame, -640, 0);
+    }
+    if(self.pollVC){
+        self.pollVC.view.frame = CGRectOffset(self.pollVC.view.frame, -640, 0);
     }
     self.contactsVC.view.frame = CGRectOffset(self.contactsVC.view.frame, -640, 0);
     self.allEventsVC.view.frame = CGRectOffset(self.allEventsVC.view.frame, -640, 0);
@@ -249,12 +317,44 @@
     }];
 }
 
+#pragma mark - All Events Delegate
+
+-(void)didSelectPoll:(CKEvent *)selectedPoll{
+    
+    [self addChildViewController:self.pollVC];
+    [self.pollVC didMoveToParentViewController:self];
+    [self.view addSubview:self.pollVC.view];
+    
+    [self.pollVC loadSelectedPoll:selectedPoll];
+    
+    [UIView animateWithDuration:.4 animations:^{
+        self.pollVC.view.frame = self.view.frame;
+        self.allEventsVC.view.frame = CGRectOffset(self.allEventsVC.view.frame, -240, 0);
+    } completion:^(BOOL finished) {
+        [self.view bringSubviewToFront:self.groupsVC.view];
+    }];
+}
+
+#pragma mark - Poll Delegate
+
+-(void)didSelectPollExit{
+    [UIView animateWithDuration:.4 animations:^{
+        self.pollVC.view.frame = CGRectOffset(self.pollVC.view.frame, 240, 0);
+        self.allEventsVC.view.frame = self.view.frame;
+    } completion:^(BOOL finished) {
+        [self.pollVC removeFromParentViewController];
+        [self.pollVC.view removeFromSuperview];
+        self.pollVC = nil;
+    }];
+}
+
 #pragma mark - Lazy
 
 -(CKAllEventsVC *)allEventsVC{
     if(!_allEventsVC){
         _allEventsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"allEventsVC"];
         _allEventsVC.view.frame = CGRectOffset(self.view.frame, 640, 0);
+        _allEventsVC.delegate = self;
     }
     return _allEventsVC;
 }
@@ -286,6 +386,16 @@
     }
     return _profileVC;
 }
+
+-(CKPollVC *)pollVC {
+    if(!_pollVC){
+        _pollVC = [self.storyboard instantiateViewControllerWithIdentifier:@"pollVC"];
+        _pollVC.view.frame = CGRectOffset(self.allEventsVC.view.frame, 240, 0);
+        _pollVC.delegate = self;
+    }
+    return _pollVC;
+}
+
 
 #pragma mark - Memory
 

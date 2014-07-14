@@ -54,6 +54,20 @@
 
 #pragma mark - Lazy Instantiation
 
+-(NSMutableArray *)groups{
+    if(!_groups){
+        _groups = [[NSMutableArray alloc] init];
+    }
+    return _groups;
+}
+
+-(NSMutableArray *)incomingGroupRequests{
+    if(!_incomingGroupRequests){
+        _incomingGroupRequests = [[NSMutableArray alloc] init];
+    }
+    return _incomingGroupRequests;
+}
+
 -(NSMutableArray *)contacts{
     if(!_contacts){
         _contacts = [[NSMutableArray alloc] init];

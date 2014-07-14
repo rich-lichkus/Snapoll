@@ -55,12 +55,27 @@
 		0F8FC0F41912D23600D27B80 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F31912D23600D27B80 /* Security.framework */; };
 		0F8FC0F61912D23D00D27B80 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F51912D23D00D27B80 /* StoreKit.framework */; };
 		0F8FC0F81912D24600D27B80 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8FC0F71912D24600D27B80 /* SystemConfiguration.framework */; };
+		0F92FDF1196B257A00319F58 /* PaintCodeImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FDF0196B257A00319F58 /* PaintCodeImages.m */; };
+		0F92FDF4196B273F00319F58 /* CKBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FDF3196B273F00319F58 /* CKBackButton.m */; };
+		0F92FDF7196B393800319F58 /* CKPlusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FDF6196B393800319F58 /* CKPlusButton.m */; };
+		0F92FDFA196B3A9700319F58 /* CKSemiCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FDF9196B3A9700319F58 /* CKSemiCircleButton.m */; };
+		0F92FDFD196B40BB00319F58 /* CKRedXButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FDFC196B40BB00319F58 /* CKRedXButton.m */; };
+		0F92FE01196B5C9C00319F58 /* CKLoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FE00196B5C9C00319F58 /* CKLoginTextField.m */; };
+		0F92FE0A196BF79100319F58 /* CKUserBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FE09196BF79100319F58 /* CKUserBarButton.m */; };
+		0F92FE0D196C941500319F58 /* CKLoginSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FE0C196C941500319F58 /* CKLoginSegmentedControl.m */; };
+		0F92FE0F196CB32F00319F58 /* Thonburi.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 0F92FE0E196CB32F00319F58 /* Thonburi.ttc */; };
+		0F92FE1D196E532600319F58 /* CKEventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FE1C196E532600319F58 /* CKEventsCell.m */; };
+		0F92FE24196E7AD100319F58 /* CKPollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FE23196E7AD100319F58 /* CKPollVC.m */; };
+		0F92FE27196E80D700319F58 /* CKEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FE26196E80D700319F58 /* CKEvent.m */; };
+		0F92FE2C196F47AE00319F58 /* CKDetailEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F92FE2B196F47AE00319F58 /* CKDetailEventCell.m */; };
 		0FD01F1F194812A900ED20B3 /* CKGroupEventsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD01F1E194812A900ED20B3 /* CKGroupEventsVC.m */; };
 		0FD01F231948DE2300ED20B3 /* CKContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD01F221948DE2300ED20B3 /* CKContactsVC.m */; };
 		0FD01F261948ECD300ED20B3 /* CKChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD01F251948ECD300ED20B3 /* CKChatVC.m */; };
 		0FE2929A190727DF00FBFC23 /* CKNewGroupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */; };
 		0FE2929E19076CA100FBFC23 /* CKLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE2929D19076CA100FBFC23 /* CKLoginVC.m */; };
 		0FE5281C190EBEDC0011FB9A /* CKArchiverHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5281B190EBEDC0011FB9A /* CKArchiverHelper.m */; };
+		0FF56847195A242D00B82376 /* CKInSimpleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF56846195A242D00B82376 /* CKInSimpleMessageCell.m */; };
+		0FF5684B195A2A7300B82376 /* CKOutSimpleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF5684A195A2A7300B82376 /* CKOutSimpleMessageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +161,31 @@
 		0F8FC0F31912D23600D27B80 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0F8FC0F51912D23D00D27B80 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0F8FC0F71912D24600D27B80 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0F92FDEF196B257A00319F58 /* PaintCodeImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintCodeImages.h; sourceTree = "<group>"; };
+		0F92FDF0196B257A00319F58 /* PaintCodeImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintCodeImages.m; sourceTree = "<group>"; };
+		0F92FDF2196B273F00319F58 /* CKBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKBackButton.h; sourceTree = "<group>"; };
+		0F92FDF3196B273F00319F58 /* CKBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKBackButton.m; sourceTree = "<group>"; };
+		0F92FDF5196B393800319F58 /* CKPlusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKPlusButton.h; sourceTree = "<group>"; };
+		0F92FDF6196B393800319F58 /* CKPlusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKPlusButton.m; sourceTree = "<group>"; };
+		0F92FDF8196B3A9700319F58 /* CKSemiCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKSemiCircleButton.h; sourceTree = "<group>"; };
+		0F92FDF9196B3A9700319F58 /* CKSemiCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKSemiCircleButton.m; sourceTree = "<group>"; };
+		0F92FDFB196B40BB00319F58 /* CKRedXButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRedXButton.h; sourceTree = "<group>"; };
+		0F92FDFC196B40BB00319F58 /* CKRedXButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKRedXButton.m; sourceTree = "<group>"; };
+		0F92FDFF196B5C9C00319F58 /* CKLoginTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKLoginTextField.h; sourceTree = "<group>"; };
+		0F92FE00196B5C9C00319F58 /* CKLoginTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKLoginTextField.m; sourceTree = "<group>"; };
+		0F92FE08196BF79100319F58 /* CKUserBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKUserBarButton.h; sourceTree = "<group>"; };
+		0F92FE09196BF79100319F58 /* CKUserBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKUserBarButton.m; sourceTree = "<group>"; };
+		0F92FE0B196C941500319F58 /* CKLoginSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKLoginSegmentedControl.h; sourceTree = "<group>"; };
+		0F92FE0C196C941500319F58 /* CKLoginSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKLoginSegmentedControl.m; sourceTree = "<group>"; };
+		0F92FE0E196CB32F00319F58 /* Thonburi.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; name = Thonburi.ttc; path = ../../../../../../../../System/Library/Fonts/Thonburi.ttc; sourceTree = "<group>"; };
+		0F92FE1B196E532600319F58 /* CKEventsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKEventsCell.h; sourceTree = "<group>"; };
+		0F92FE1C196E532600319F58 /* CKEventsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKEventsCell.m; sourceTree = "<group>"; };
+		0F92FE22196E7AD100319F58 /* CKPollVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKPollVC.h; sourceTree = "<group>"; };
+		0F92FE23196E7AD100319F58 /* CKPollVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKPollVC.m; sourceTree = "<group>"; };
+		0F92FE25196E80D700319F58 /* CKEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKEvent.h; sourceTree = "<group>"; };
+		0F92FE26196E80D700319F58 /* CKEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKEvent.m; sourceTree = "<group>"; };
+		0F92FE2A196F47AE00319F58 /* CKDetailEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKDetailEventCell.h; sourceTree = "<group>"; };
+		0F92FE2B196F47AE00319F58 /* CKDetailEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKDetailEventCell.m; sourceTree = "<group>"; };
 		0FD01F1D194812A800ED20B3 /* CKGroupEventsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKGroupEventsVC.h; sourceTree = "<group>"; };
 		0FD01F1E194812A900ED20B3 /* CKGroupEventsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKGroupEventsVC.m; sourceTree = "<group>"; };
 		0FD01F211948DE2300ED20B3 /* CKContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKContactsVC.h; sourceTree = "<group>"; };
@@ -158,6 +198,10 @@
 		0FE2929D19076CA100FBFC23 /* CKLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKLoginVC.m; sourceTree = "<group>"; };
 		0FE5281A190EBEDC0011FB9A /* CKArchiverHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKArchiverHelper.h; path = Snapoll/CKArchiverHelper.h; sourceTree = "<group>"; };
 		0FE5281B190EBEDC0011FB9A /* CKArchiverHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKArchiverHelper.m; path = Snapoll/CKArchiverHelper.m; sourceTree = "<group>"; };
+		0FF56845195A242D00B82376 /* CKInSimpleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKInSimpleMessageCell.h; sourceTree = "<group>"; };
+		0FF56846195A242D00B82376 /* CKInSimpleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKInSimpleMessageCell.m; sourceTree = "<group>"; };
+		0FF56849195A2A7300B82376 /* CKOutSimpleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKOutSimpleMessageCell.h; sourceTree = "<group>"; };
+		0FF5684A195A2A7300B82376 /* CKOutSimpleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKOutSimpleMessageCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +241,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F104DF119648F2100C8276E /* PaintCode */ = {
+			isa = PBXGroup;
+			children = (
+				0F92FDEF196B257A00319F58 /* PaintCodeImages.h */,
+				0F92FDF0196B257A00319F58 /* PaintCodeImages.m */,
+			);
+			name = PaintCode;
+			sourceTree = "<group>";
+		};
 		0F17EA0D1947B86500EBE443 /* Group Root */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +267,7 @@
 			children = (
 				0F17EA0E1947B95C00EBE443 /* CKAllEventsVC.h */,
 				0F17EA0F1947B95C00EBE443 /* CKAllEventsVC.m */,
+				0F92FE1A196E52F200319F58 /* Cell */,
 			);
 			name = CKAllEvents;
 			sourceTree = "<group>";
@@ -329,7 +383,9 @@
 				0F8D923F19136BD6002432A6 /* CKSignUpVC.m */,
 				0FE2929C19076CA100FBFC23 /* CKLoginVC.h */,
 				0FE2929D19076CA100FBFC23 /* CKLoginVC.m */,
+				0F92FDFE196B5C6E00319F58 /* UIElements */,
 				0F70DA791918458F00DD6996 /* Profile */,
+				0F92FE13196DE41000319F58 /* Poll */,
 				0F70DA7319182A1B00DD6996 /* Hot Box Root */,
 				0F17EA0D1947B86500EBE443 /* Group Root */,
 			);
@@ -365,7 +421,17 @@
 		0F44173B1905F7320090E88C /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				0F92FE0E196CB32F00319F58 /* Thonburi.ttc */,
 				0F37B67C1905CEC30006444C /* Images.xcassets */,
+				0F104DF119648F2100C8276E /* PaintCode */,
+				0F92FDF2196B273F00319F58 /* CKBackButton.h */,
+				0F92FDF3196B273F00319F58 /* CKBackButton.m */,
+				0F92FDF5196B393800319F58 /* CKPlusButton.h */,
+				0F92FDF6196B393800319F58 /* CKPlusButton.m */,
+				0F92FDF8196B3A9700319F58 /* CKSemiCircleButton.h */,
+				0F92FDF9196B3A9700319F58 /* CKSemiCircleButton.m */,
+				0F92FDFB196B40BB00319F58 /* CKRedXButton.h */,
+				0F92FDFC196B40BB00319F58 /* CKRedXButton.m */,
 			);
 			name = Media;
 			sourceTree = "<group>";
@@ -406,6 +472,8 @@
 			children = (
 				0F44172E1905F3770090E88C /* CKSimpleText.h */,
 				0F44172F1905F3770090E88C /* CKSimpleText.m */,
+				0F92FE25196E80D700319F58 /* CKEvent.h */,
+				0F92FE26196E80D700319F58 /* CKEvent.m */,
 				0F4417311905F46D0090E88C /* CKPoll.h */,
 				0F4417321905F46D0090E88C /* CKPoll.m */,
 			);
@@ -471,6 +539,7 @@
 			children = (
 				0FD01F241948ECBF00ED20B3 /* CKChatVC.h */,
 				0FD01F251948ECD300ED20B3 /* CKChatVC.m */,
+				0FF56848195A244100B82376 /* Chat Cells */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -493,6 +562,45 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
+		0F92FDFE196B5C6E00319F58 /* UIElements */ = {
+			isa = PBXGroup;
+			children = (
+				0F92FDFF196B5C9C00319F58 /* CKLoginTextField.h */,
+				0F92FE00196B5C9C00319F58 /* CKLoginTextField.m */,
+				0F92FE0B196C941500319F58 /* CKLoginSegmentedControl.h */,
+				0F92FE0C196C941500319F58 /* CKLoginSegmentedControl.m */,
+			);
+			name = UIElements;
+			sourceTree = "<group>";
+		};
+		0F92FE13196DE41000319F58 /* Poll */ = {
+			isa = PBXGroup;
+			children = (
+				0F92FE22196E7AD100319F58 /* CKPollVC.h */,
+				0F92FE23196E7AD100319F58 /* CKPollVC.m */,
+				0F92FE29196F477A00319F58 /* Cell */,
+			);
+			name = Poll;
+			sourceTree = "<group>";
+		};
+		0F92FE1A196E52F200319F58 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F92FE1B196E532600319F58 /* CKEventsCell.h */,
+				0F92FE1C196E532600319F58 /* CKEventsCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		0F92FE29196F477A00319F58 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F92FE2A196F47AE00319F58 /* CKDetailEventCell.h */,
+				0F92FE2B196F47AE00319F58 /* CKDetailEventCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		0FD01F20194812E700ED20B3 /* Events */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,8 +617,21 @@
 				0F37B6A11905DB150006444C /* CKGroupVC.m */,
 				0FE29298190727DF00FBFC23 /* CKNewGroupVC.h */,
 				0FE29299190727DF00FBFC23 /* CKNewGroupVC.m */,
+				0F92FE08196BF79100319F58 /* CKUserBarButton.h */,
+				0F92FE09196BF79100319F58 /* CKUserBarButton.m */,
 			);
 			name = Group;
+			sourceTree = "<group>";
+		};
+		0FF56848195A244100B82376 /* Chat Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0FF56845195A242D00B82376 /* CKInSimpleMessageCell.h */,
+				0FF56846195A242D00B82376 /* CKInSimpleMessageCell.m */,
+				0FF56849195A2A7300B82376 /* CKOutSimpleMessageCell.h */,
+				0FF5684A195A2A7300B82376 /* CKOutSimpleMessageCell.m */,
+			);
+			name = "Chat Cells";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -561,6 +682,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Richard Lichkus";
 				TargetAttributes = {
+					0F37B6611905CEC20006444C = {
+						DevelopmentTeam = YW6R5GT9L6;
+					};
 					0F37B6811905CEC30006444C = {
 						TestTargetID = 0F37B6611905CEC20006444C;
 					};
@@ -589,6 +713,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F92FE0F196CB32F00319F58 /* Thonburi.ttc in Resources */,
 				0F37B6721905CEC30006444C /* InfoPlist.strings in Resources */,
 				0F37B67D1905CEC30006444C /* Images.xcassets in Resources */,
 				0F37B69B1905CEF50006444C /* Storyboard.storyboard in Resources */,
@@ -611,31 +736,45 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FE2929E19076CA100FBFC23 /* CKLoginVC.m in Sources */,
+				0F92FE27196E80D700319F58 /* CKEvent.m in Sources */,
+				0F92FDFA196B3A9700319F58 /* CKSemiCircleButton.m in Sources */,
 				0F70DA781918457E00DD6996 /* CKProfileVC.m in Sources */,
 				0F44172D1905F0750090E88C /* CKMessage.m in Sources */,
 				0F37B6781905CEC30006444C /* CKAppDelegate.m in Sources */,
 				0F37B6741905CEC30006444C /* main.m in Sources */,
 				0FD01F1F194812A900ED20B3 /* CKGroupEventsVC.m in Sources */,
 				0F2212CF1948F30900A1374D /* CKGroupMemberVC.m in Sources */,
+				0F92FDFD196B40BB00319F58 /* CKRedXButton.m in Sources */,
 				0F37B67B1905CEC30006444C /* Snapoll.xcdatamodeld in Sources */,
+				0FF5684B195A2A7300B82376 /* CKOutSimpleMessageCell.m in Sources */,
 				0F37B6A21905DB150006444C /* CKGroupVC.m in Sources */,
 				0F8FC0E31912C88900D27B80 /* CKNetworkHelper.m in Sources */,
 				0F4417361905F4770090E88C /* CKQuestion.m in Sources */,
 				0F17EA0C1947AEE000EBE443 /* CKHotBoxRootVC.m in Sources */,
 				0FD01F231948DE2300ED20B3 /* CKContactsVC.m in Sources */,
+				0F92FE0D196C941500319F58 /* CKLoginSegmentedControl.m in Sources */,
 				0F4417441905FC6D0090E88C /* CKMultipleChoice.m in Sources */,
 				0F70DA6E19181A8C00DD6996 /* CKNewMemberVC.m in Sources */,
 				0FE5281C190EBEDC0011FB9A /* CKArchiverHelper.m in Sources */,
 				0F2212D31949085F00A1374D /* CKContactsCell.m in Sources */,
 				0F4417391905F6BB0090E88C /* CKEnumerations.m in Sources */,
+				0FF56847195A242D00B82376 /* CKInSimpleMessageCell.m in Sources */,
 				0FD01F261948ECD300ED20B3 /* CKChatVC.m in Sources */,
+				0F92FE2C196F47AE00319F58 /* CKDetailEventCell.m in Sources */,
 				0F44173F1905F9750090E88C /* CKConstants.m in Sources */,
 				0F4417331905F46D0090E88C /* CKPoll.m in Sources */,
+				0F92FE01196B5C9C00319F58 /* CKLoginTextField.m in Sources */,
 				0F44172A1905F03D0090E88C /* CKUser.m in Sources */,
+				0F92FDF7196B393800319F58 /* CKPlusButton.m in Sources */,
+				0F92FE0A196BF79100319F58 /* CKUserBarButton.m in Sources */,
+				0F92FDF4196B273F00319F58 /* CKBackButton.m in Sources */,
+				0F92FE1D196E532600319F58 /* CKEventsCell.m in Sources */,
 				0F4417301905F3770090E88C /* CKSimpleText.m in Sources */,
 				0F4F0E59191D99C7008B4480 /* CKAddContactsTVCell.m in Sources */,
 				0FE2929A190727DF00FBFC23 /* CKNewGroupVC.m in Sources */,
 				0F8D924019136BD6002432A6 /* CKSignUpVC.m in Sources */,
+				0F92FDF1196B257A00319F58 /* PaintCodeImages.m in Sources */,
+				0F92FE24196E7AD100319F58 /* CKPollVC.m in Sources */,
 				0F4417471905FC930090E88C /* CKFreeResponse.m in Sources */,
 				0F17EA091947AB2F00EBE443 /* CKGroupRootVC.m in Sources */,
 				0F4417261905F0120090E88C /* CKGroup.m in Sources */,
@@ -697,7 +836,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Richard Lichkus (T6TUP7V3MY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Richard Lichkus (T6TUP7V3MY)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -735,7 +875,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Richard Lichkus (T6TUP7V3MY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Richard Lichkus (T6TUP7V3MY)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -756,14 +897,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Richard Lichkus (T6TUP7V3MY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Richard Lichkus (T6TUP7V3MY)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/Ricard/Documents/iDev,
+					Lab/Frameworks/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Snapoll/Snapoll-Prefix.pch";
 				INFOPLIST_FILE = "Snapoll/Snapoll-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -773,14 +919,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Richard Lichkus (T6TUP7V3MY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Richard Lichkus (T6TUP7V3MY)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/Ricard/Documents/iDev,
+					Lab/Frameworks/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Snapoll/Snapoll-Prefix.pch";
 				INFOPLIST_FILE = "Snapoll/Snapoll-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

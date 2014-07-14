@@ -23,4 +23,7 @@
 @property (strong, nonatomic) CKGroup *selectedGroup;
 @property (strong, nonatomic) CKChatVC *chatVC;
 
+-(void)openRightMenu;
+-(void)makeAllEventsVCVisible;
+
 @end

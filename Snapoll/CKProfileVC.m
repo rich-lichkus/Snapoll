@@ -9,6 +9,7 @@
 #import "CKProfileVC.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreImage/CoreImage.h>
+#import "PaintCodeImages.h"
 
 @interface CKProfileVC ()
 
@@ -99,8 +100,8 @@
     self.lblUsername.text = self.selectedContact.userName;
 //    self.lblName.text = self.selectedContact.firstName;
     self.lblFullname.text = [[self.selectedContact.firstName stringByAppendingString:@" "] stringByAppendingString:self.selectedContact.lastName];
-    self.imgAvatar.image = [self blur:[UIImage imageNamed:@"sf"]];
-    self.imgAvatar.frame = CGRectMake(0, 20, 240, 274);
+    //self.imgAvatar.image = [PaintCodeImages imageOfProfileBackground];//[self blur:[UIImage imageNamed:@"sf"]];
+    //self.imgAvatar.frame = CGRectMake(0, 20, 240, 274);
     self.imgAvatarMain.image = [UIImage imageNamed:@"sf"];
     
     switch (self.selectedContact.userStatus) {

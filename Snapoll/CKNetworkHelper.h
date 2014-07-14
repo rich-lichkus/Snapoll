@@ -26,8 +26,7 @@
 
 +(void)parseRetrieveGroupsWithCompletion:(void(^)(NSError *error))completion;
 
-+(void)parseAddNewGroup:(NSString*)groupName
-         withCompletion:(void(^)(NSError *addGroupError, NSError *addGroupToUserError))completion;
++(void)parseAddNewGroup:(NSString*)groupName withCompletion:(void(^)(NSError *addGroupError, NSError *addGroupToUserError))completion;
 
 +(void)parseAddExistingGroup:(NSString*)groupName withCompletion:(void(^)(NSError *addGroupError, NSError *addGroupToUserError))completion;
 
@@ -36,6 +35,8 @@
 /// Group Members
 
 +(void)parseRetrieveGroupMembers:(NSString*)groupID WithCompletion:(void(^)(NSError *error))completion;
+
++(void) parseRetrieveMessageForGroupId:(NSString*)groupId withCompletion:(void(^)(NSError *error))completion;
 
 +(void)getUserInfo;
 

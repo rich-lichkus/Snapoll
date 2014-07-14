@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CKEvent.h"
+
+@protocol CKGroupEventsVCDelegate <NSObject>
+
+-(void)didSelectPoll:(CKEvent*)selectedPoll;
+
+@end
 
 @interface CKGroupEventsVC : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITableView *tblGroupEvents;
+@property (nonatomic, unsafe_unretained) id<CKGroupEventsVCDelegate> delegate;
 
 @end
